@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanaTomo", "KanaTomo\KanaTomo.csproj", "{C8B335FC-77AB-47DD-9C4C-62249D121ECA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98B3C916-DBC9-4D3B-89D2-C62CF77C83D8}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8B335FC-77AB-47DD-9C4C-62249D121ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B335FC-77AB-47DD-9C4C-62249D121ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B335FC-77AB-47DD-9C4C-62249D121ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B335FC-77AB-47DD-9C4C-62249D121ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
