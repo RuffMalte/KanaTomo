@@ -7,10 +7,12 @@ namespace KanaTomo.Services;
 public class TranslationService : ITranslationService
 {
     private readonly HttpClient _httpClient;
-    private const string ApiBaseUrl = "http://localhost:5070/api/v1/translate";
+    private readonly string _apiBaseUrl;
 
-    public TranslationService(IHttpClientFactory httpClientFactory, IWebHostEnvironment env)
+    public TranslationService(IHttpClientFactory httpClientFactory, IConfiguration configuration, IWebHostEnvironment env)
     {
+        _apiBaseUrl = configuration["ApiBaseUrl"] ?? "http://localhost:5070/api/v1/translate";
+
         if (env.IsDevelopment())
         {
             var handler = new HttpClientHandler
@@ -27,9 +29,8 @@ public class TranslationService : ITranslationService
 
     public async Task<List<TranslationModel>> Translate(string text, string targetLanguage)
     {
-        var response =
-            await _httpClient.GetAsync(
-                $"{ApiBaseUrl}/translate?text={Uri.EscapeDataString(text)}&target={targetLanguage}");
+        var response = await _httpClient.GetAsync(
+            $"{_apiBaseUrl}/translate?text={Uri.EscapeDataString(text)}&target={targetLanguage}");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<List<TranslationModel>>(content);

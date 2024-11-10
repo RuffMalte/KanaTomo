@@ -9,20 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationAPI.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Helpers/ApiHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Models/TranslationModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Services/ITranslationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Models/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +154,9 @@
       <workItem from="1730216293941" duration="4789000" />
       <workItem from="1730804941950" duration="21000" />
       <workItem from="1731064397246" duration="14348000" />
-      <workItem from="1731229679164" duration="7385000" />
+      <workItem from="1731229679164" duration="7737000" />
+      <workItem from="1731237810336" duration="99000" />
+      <workItem from="1731237919562" duration="5119000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -174,7 +166,23 @@
       <option name="project" value="LOCAL" />
       <updated>1730130159503</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="base translation Service with view">
+      <option name="closed" value="true" />
+      <created>1731237551443</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731237551443</updated>
+    </task>
+    <task id="LOCAL-00003" summary="base translation Service with view">
+      <option name="closed" value="true" />
+      <created>1731237556645</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731237556645</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +193,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="base translation Service with view" />
+    <option name="LAST_COMMIT_MESSAGE" value="base translation Service with view" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

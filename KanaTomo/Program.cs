@@ -4,6 +4,12 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Kestrel to listen on all interfaces
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(80);
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -34,6 +40,8 @@ builder.Services.AddHttpClient();
 // Register TranslationService
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 
+// Add configuration
+builder.Configuration.AddEnvironmentVariables();
 
 var app = builder.Build();
 
