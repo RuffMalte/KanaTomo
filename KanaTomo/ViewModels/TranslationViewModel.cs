@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using KanaTomo.Models;
-using KanaTomo.Models.Translation;
+using KanaTomo.Web.Models;
+using KanaTomo.Web.Models.Translation;
 
 namespace KanaTomo.ViewModels;
 

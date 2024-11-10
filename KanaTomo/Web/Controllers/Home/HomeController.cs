@@ -2,7 +2,7 @@
 using KanaTomo.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KanaTomo.Controllers.Home;
+namespace KanaTomo.Web.Controllers.Home;
 
 public class HomeController : Controller
 {

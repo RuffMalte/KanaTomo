@@ -1,8 +1,8 @@
-using KanaTomo.Services.Translation;
 using KanaTomo.ViewModels;
+using KanaTomo.Web.Services.Translation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KanaTomo.Controllers.Translation;
+namespace KanaTomo.Web.Controllers.Translation;
 public class TranslationController : Controller
 {
     private readonly ITranslationService _translationService;

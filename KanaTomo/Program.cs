@@ -1,8 +1,8 @@
 using KanaTomo.API.APITranslation;
-using KanaTomo.Repositories;
-using KanaTomo.Repositories.Translation;
-using KanaTomo.Services;
-using KanaTomo.Services.Translation;
+using KanaTomo.Web.Repositories;
+using KanaTomo.Web.Services;
+using KanaTomo.Web.Repositories.Translation;
+using KanaTomo.Web.Services.Translation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
