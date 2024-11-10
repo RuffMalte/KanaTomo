@@ -1,8 +1,7 @@
 using KanaTomo.Models;
 using Microsoft.AspNetCore.Mvc;
-namespace KanaTomo.Controllers;
-using System.Collections.Generic;
 
+namespace KanaTomo.API;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
@@ -22,7 +21,7 @@ public class TranslateController : ControllerBase
         // Mock translation logic for demo purposes
         var translationResult = new List<TranslationModel>
         {
-            new TranslationModel("Hello", target == "Japanese" ? "こんにちは" : "Hello", target),
+            new TranslationModel(text, target == "Japanese" ? "こんにちは" : "Hello", target),
             new TranslationModel("World", target == "Japanese" ? "世界" : "World", target),
             new TranslationModel("Goodbye", target == "Japanese" ? "さようなら" : "Goodbye", target)
         };

@@ -1,4 +1,4 @@
-namespace KanaTomo.Models;
+namespace KanaTomo.ViewModels;
 
 public class ErrorViewModel
 {

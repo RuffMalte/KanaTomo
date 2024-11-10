@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KanaTomo.Models;
+using KanaTomo.ViewModels;
 
 namespace KanaTomo.Controllers;
 

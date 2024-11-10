@@ -8,11 +8,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="docker compose port adjusted">
+    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="fixed portmapping">
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Repositories/ITranslationRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Repositories/TranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Models/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Models/TranslationModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/TranslationAPI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +33,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f245cf881f97452cb8c1b0e94d54df4e32400/8a/661a63af/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81427bb79ca4dd8b7472ec794faaa3c413e68ebdba20182846a49537f18fca64/SwaggerGenServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mr/RiderProjects/KanaTomo/KanaTomo/Controllers/TranslationAPI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mr/RiderProjects/KanaTomo/KanaTomo/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -158,7 +165,7 @@
       <workItem from="1731064397246" duration="14348000" />
       <workItem from="1731229679164" duration="7737000" />
       <workItem from="1731237810336" duration="99000" />
-      <workItem from="1731237919562" duration="7362000" />
+      <workItem from="1731237919562" duration="11317000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -192,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731245092187</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed portmapping">
+      <option name="closed" value="true" />
+      <created>1731247351911</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731247351911</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +220,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="base translation Service with view" />
     <MESSAGE value="docker compose port adjusted" />
-    <option name="LAST_COMMIT_MESSAGE" value="docker compose port adjusted" />
+    <MESSAGE value="fixed portmapping" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed portmapping" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
