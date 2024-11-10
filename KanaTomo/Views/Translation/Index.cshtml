@@ -1,0 +1,56 @@
+@model KanaTomo.ViewModels.TranslationViewModel
+
+<h2>Translation</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-controller="Translation" asp-action="Translate" method="post">
+    <div class="form-group">
+        <label asp-for="TextToTranslate">Text to Translate</label>
+        <textarea asp-for="TextToTranslate" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="TextToTranslate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TargetLanguage">Target Language</label>
+        <select asp-for="TargetLanguage" class="form-control">
+            <option value="Japanese">Japanese</option>
+            <option value="English">English</option>
+        </select>
+        <span asp-validation-for="TargetLanguage" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Translate</button>
+</form>
+
+@if (Model.TranslationResults != null && Model.TranslationResults.Any())
+{
+    <h3 class="mt-4">Translation Results:</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Original Text</th>
+            <th>Translated Text</th>
+            <th>Target Language</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var result in Model.TranslationResults)
+        {
+            <tr>
+                <td>@result.OriginalText</td>
+                <td>@result.TranslatedText</td>
+                <td>@result.TargetLanguage</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
