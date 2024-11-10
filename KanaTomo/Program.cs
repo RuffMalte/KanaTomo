@@ -5,10 +5,17 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Kestrel to listen on all interfaces
-builder.WebHost.ConfigureKestrel(options =>
+if (builder.Environment.IsDevelopment())
 {
-    options.ListenAnyIP(80);
-});
+    builder.WebHost.UseUrls("http://localhost:5070");
+}
+else
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(80);
+    });
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
