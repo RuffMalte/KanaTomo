@@ -1,5 +1,8 @@
+using KanaTomo.API.APITranslation;
 using KanaTomo.Repositories;
+using KanaTomo.Repositories.Translation;
 using KanaTomo.Services;
+using KanaTomo.Services.Translation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
@@ -48,6 +51,9 @@ builder.Services.AddHttpClient();
 // Register TranslationService
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
+
+builder.Services.AddScoped<IApiTranslationRepository, ApiTranslationRepository>();
+builder.Services.AddScoped<IApiTranslationService, ApiTranslationService>();
 
 
 // Add configuration

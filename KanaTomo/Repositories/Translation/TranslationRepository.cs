@@ -1,7 +1,7 @@
-using KanaTomo.Models;
+using KanaTomo.Models.Translation;
 using Newtonsoft.Json;
 
-namespace KanaTomo.Repositories;
+namespace KanaTomo.Repositories.Translation;
 
 public class TranslationRepository : ITranslationRepository
 {

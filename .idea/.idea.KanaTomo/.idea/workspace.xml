@@ -8,16 +8,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="fixed portmapping">
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Repositories/ITranslationRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Repositories/TranslationRepository.cs" afterDir="false" />
+    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="repository pattern">
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Src/API/APITranslation/ApiTranslationRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Src/API/APITranslation/ApiTranslationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Src/API/APITranslation/TranslateController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/TranslationAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/API/TranslationAPI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Controllers/Home/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/TranslationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Controllers/Translation/TranslationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Helpers/ApiHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Helpers/ApiHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Models/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Models/Translation/TranslationModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Repositories/ITranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Repositories/Translation/ITranslationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Repositories/TranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Repositories/Translation/TranslationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/ITranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Services/Translation/ITranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Services/Translation/TranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/ViewModels/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/ViewModels/TranslationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Home/Privacy.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Home/Privacy.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/_Layout.cshtml.css" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Shared/_Layout.cshtml.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Shared/_ValidationScriptsPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/Translation/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Src/Views/_ViewStart.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +182,7 @@
       <workItem from="1731064397246" duration="14348000" />
       <workItem from="1731229679164" duration="7737000" />
       <workItem from="1731237810336" duration="99000" />
-      <workItem from="1731237919562" duration="11317000" />
+      <workItem from="1731237919562" duration="12242000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -207,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731247351911</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="repository pattern">
+      <option name="closed" value="true" />
+      <created>1731251397411</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731251397411</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +246,8 @@
     <MESSAGE value="base translation Service with view" />
     <MESSAGE value="docker compose port adjusted" />
     <MESSAGE value="fixed portmapping" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed portmapping" />
+    <MESSAGE value="repository pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="repository pattern" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

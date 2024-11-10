@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using KanaTomo.Models;
 using KanaTomo.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace KanaTomo.Controllers;
+namespace KanaTomo.Controllers.Home;
 
 public class HomeController : Controller
 {

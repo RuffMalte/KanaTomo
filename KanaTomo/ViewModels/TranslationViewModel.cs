@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using KanaTomo.Models;
+using KanaTomo.Models.Translation;
 
 namespace KanaTomo.ViewModels;
 

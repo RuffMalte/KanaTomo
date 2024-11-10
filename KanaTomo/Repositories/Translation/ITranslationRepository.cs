@@ -1,6 +1,6 @@
-using KanaTomo.Models;
+using KanaTomo.Models.Translation;
 
-namespace KanaTomo.Repositories;
+namespace KanaTomo.Repositories.Translation;
 
 public interface ITranslationRepository
 {

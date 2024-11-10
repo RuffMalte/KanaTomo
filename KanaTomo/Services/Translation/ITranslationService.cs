@@ -1,6 +1,6 @@
-using KanaTomo.Models;
+using KanaTomo.Models.Translation;
 
-namespace KanaTomo.Services;
+namespace KanaTomo.Services.Translation;
 
 public interface ITranslationService
 {
