@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace KanaTomo.Web.Models.Translation;
+namespace KanaTomo.Models.Translation;
 
 public class TranslationModel
 {

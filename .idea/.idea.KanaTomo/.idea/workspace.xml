@@ -8,22 +8,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="reorderd structured">
+    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="reorderd folders">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/Home/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Home/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Controllers/Translation/TranslationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Translation/TranslationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Helpers/ApiHelper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Models/Translation/TranslationModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Repositories/Translation/ITranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Repositories/Translation/TranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/Translation/ITranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Services/Translation/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Models/Translation/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +174,7 @@
       <workItem from="1731064397246" duration="14348000" />
       <workItem from="1731229679164" duration="7737000" />
       <workItem from="1731237810336" duration="99000" />
-      <workItem from="1731237919562" duration="12764000" />
+      <workItem from="1731237919562" duration="18971000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -237,7 +232,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731252402334</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="reorderd folders">
+      <option name="closed" value="true" />
+      <created>1731252777849</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731252777849</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +256,8 @@
     <MESSAGE value="fixed portmapping" />
     <MESSAGE value="repository pattern" />
     <MESSAGE value="reorderd structured" />
-    <option name="LAST_COMMIT_MESSAGE" value="reorderd structured" />
+    <MESSAGE value="reorderd folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="reorderd folders" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

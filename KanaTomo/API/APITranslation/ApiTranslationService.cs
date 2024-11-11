@@ -1,4 +1,4 @@
-using KanaTomo.Web.Models.Translation;
+using KanaTomo.Models.Translation;
 
 namespace KanaTomo.API.APITranslation;
 
