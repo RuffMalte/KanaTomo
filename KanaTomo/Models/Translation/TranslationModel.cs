@@ -4,18 +4,17 @@ namespace KanaTomo.Models.Translation;
 
 public class TranslationModel
 {
+    public string OriginalText { get; set; }
+    public string TargetLanguage { get; set; }
+    public JishoResponse JishoResponse { get; set; }
+    
+    // Placeholder for future implementations
+    // public GoogleResponse GoogleResponse { get; set; }
+    // public DeeplResponse DeeplResponse { get; set; }
 
-    public TranslationModel(string originalText, string translatedText, string targetLanguage)
+    public TranslationModel(string originalText, string targetLanguage)
     {
         OriginalText = originalText;
-        TranslatedText = translatedText;
         TargetLanguage = targetLanguage;
-        Id = Guid.NewGuid();
     }
-    
-    [Required]
-    public Guid Id { get; set; }
-    public string OriginalText { get; set; }
-    public string TranslatedText { get; set; }
-    public string TargetLanguage { get; set; }
 }

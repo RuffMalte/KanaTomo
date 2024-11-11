@@ -25,7 +25,7 @@ public class TranslationController : Controller
         {
             try
             {
-                model.TranslationResults = await _translationService.Translate(model.TextToTranslate, model.TargetLanguage);
+                model.TranslationResult = await _translationService.Translate(model.TextToTranslate, model.TargetLanguage);
             }
             catch (HttpRequestException ex)
             {

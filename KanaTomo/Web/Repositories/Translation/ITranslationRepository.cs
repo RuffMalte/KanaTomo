@@ -4,5 +4,5 @@ namespace KanaTomo.Web.Repositories.Translation;
 
 public interface ITranslationRepository
 {
-    Task<List<TranslationModel>> TranslateAsync(string text, string targetLanguage);
+    Task<TranslationModel> TranslateAsync(string text, string targetLanguage);
 }

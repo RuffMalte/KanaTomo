@@ -12,5 +12,5 @@ public class TranslationViewModel
     [Required(ErrorMessage = "Please select a target language.")]
     public string TargetLanguage { get; set; }
 
-    public List<TranslationModel>? TranslationResults { get; set; } = new List<TranslationModel>();
+    public TranslationModel? TranslationResult { get; set; }
 }

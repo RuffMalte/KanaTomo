@@ -25,7 +25,7 @@ public class TranslateController : ControllerBase
     }
 
     [HttpGet("translate")]
-    public ActionResult<List<TranslationModel>> Translate([FromQuery] string text, [FromQuery] string target)
+    public async Task<ActionResult<TranslationModel>> Translate([FromQuery] string text, [FromQuery] string target)
     {
         if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(target))
         {
@@ -34,7 +34,7 @@ public class TranslateController : ControllerBase
 
         try
         {
-            var translationResult = _translationService.Translate(text, target);
+            var translationResult = await _translationService.Translate(text, target);
             return Ok(translationResult);
         }
         catch (Exception ex)

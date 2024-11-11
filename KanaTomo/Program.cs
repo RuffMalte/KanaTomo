@@ -52,7 +52,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITranslationService, TranslationService>();
 builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
 
-builder.Services.AddScoped<IApiTranslationRepository, ApiTranslationRepository>();
+builder.Services.AddHttpClient<IApiTranslationRepository, ApiTranslationRepository>();
 builder.Services.AddScoped<IApiTranslationService, ApiTranslationService>();
 
 

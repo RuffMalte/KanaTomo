@@ -4,14 +4,14 @@
 
 @if (!ViewData.ModelState.IsValid)
 {
-    <div class="alert alert-danger">
-        <ul>
-            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-            {
-                <li>@error.ErrorMessage</li>
-            }
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+        <li>@error.ErrorMessage</li>
+        }
+    </ul>
+</div>
 }
 
 <form asp-controller="Translation" asp-action="Translate" method="post">
@@ -31,24 +31,26 @@
     <button type="submit" class="btn btn-primary">Translate</button>
 </form>
 
-@if (Model.TranslationResults != null && Model.TranslationResults.Any())
+@if (Model.TranslationResult != null && Model.TranslationResult.JishoResponse != null)
 {
     <h3 class="mt-4">Translation Results:</h3>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>Original Text</th>
-            <th>Translated Text</th>
-            <th>Target Language</th>
+            <th>Japanese Word</th>
+            <th>Reading</th>
+            <th>Slug</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var result in Model.TranslationResults)
+        @foreach (var data in Model.TranslationResult.JishoResponse.Data)
         {
             <tr>
-                <td>@result.OriginalText</td>
-                <td>@result.TranslatedText</td>
-                <td>@result.TargetLanguage</td>
+                <td>@Model.TranslationResult.OriginalText</td>
+                <td>@(data.Japanese.FirstOrDefault()?.Word ?? "")</td>
+                <td>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</td>
+                <td>@data.Slug</td>
             </tr>
         }
         </tbody>

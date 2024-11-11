@@ -12,7 +12,7 @@ public class TranslationService : ITranslationService
         _repository = repository;
     }
 
-    public async Task<List<TranslationModel>> Translate(string text, string targetLanguage)
+    public async Task<TranslationModel> Translate(string text, string targetLanguage)
     {
         return await _repository.TranslateAsync(text, targetLanguage);
     }

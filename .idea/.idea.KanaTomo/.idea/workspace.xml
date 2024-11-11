@@ -8,13 +8,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="reorderd folders">
+    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="moved model folder">
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/JishoResponseModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Models/Translation/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Translation/TranslationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Translation/TranslationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" afterDir="false" />
@@ -174,7 +178,7 @@
       <workItem from="1731064397246" duration="14348000" />
       <workItem from="1731229679164" duration="7737000" />
       <workItem from="1731237810336" duration="99000" />
-      <workItem from="1731237919562" duration="18971000" />
+      <workItem from="1731237919562" duration="28494000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -240,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731252777849</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="moved model folder">
+      <option name="closed" value="true" />
+      <created>1731328657250</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731328657250</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +269,8 @@
     <MESSAGE value="repository pattern" />
     <MESSAGE value="reorderd structured" />
     <MESSAGE value="reorderd folders" />
-    <option name="LAST_COMMIT_MESSAGE" value="reorderd folders" />
+    <MESSAGE value="moved model folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved model folder" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
