@@ -4,7 +4,7 @@ namespace KanaTomo.API.APITranslation;
 
 public interface IApiTranslationService
 {
-    Task<TranslationModel>Translate(string text, string target);
+    Task<TranslationModel>Translate(string text);
 }
 
 
@@ -18,8 +18,8 @@ public class ApiTranslationService : IApiTranslationService
         _repository = repository;
     }
 
-    public async Task<TranslationModel> Translate(string text, string targetLanguage)
+    public async Task<TranslationModel> Translate(string text)
     {
-        return await _repository.GetTranslationsAsync(text, targetLanguage);
+        return await _repository.GetTranslationsAsync(text);
     }
 }

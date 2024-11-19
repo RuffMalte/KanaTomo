@@ -9,19 +9,15 @@ public class TranslationModel
 {
     [JsonPropertyName("originalText")]
     public string OriginalText { get; set; }
-
-    [JsonPropertyName("targetLanguage")]
-    public string TargetLanguage { get; set; }
-
+    
     [JsonPropertyName("jishoResponse")]
     public JishoResponse? JishoResponse { get; set; }
 
     [JsonPropertyName("deeplResponse")]
     public DeeplResponseModel? DeeplResponse { get; set; }
 
-    public TranslationModel(string originalText, string targetLanguage)
+    public TranslationModel(string originalText)
     {
         OriginalText = originalText;
-        TargetLanguage = targetLanguage;
     }
 }

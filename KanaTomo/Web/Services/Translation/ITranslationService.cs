@@ -4,5 +4,5 @@ namespace KanaTomo.Web.Services.Translation;
 
 public interface ITranslationService
 {
-    Task<TranslationModel?> Translate(string text, string targetLanguage);
+    Task<TranslationModel?> Translate(string text);
 }

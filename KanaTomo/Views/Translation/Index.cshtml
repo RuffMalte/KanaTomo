@@ -20,14 +20,6 @@
         <textarea asp-for="TextToTranslate" class="form-control" rows="4"></textarea>
         <span asp-validation-for="TextToTranslate" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="TargetLanguage">Target Language</label>
-        <select asp-for="TargetLanguage" class="form-control">
-            <option value="Japanese">Japanese</option>
-            <option value="English">English</option>
-        </select>
-        <span asp-validation-for="TargetLanguage" class="text-danger"></span>
-    </div>
     <button type="submit" class="btn btn-primary">Translate</button>
 </form>
 
@@ -52,13 +44,12 @@
             <td>@(data.Japanese.FirstOrDefault()?.Word ?? "")</td>
             <td>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</td>
             <td>@data.Slug</td>
-        </tr>
-        }
-        @if (Model.TranslationResult.DeeplResponse != null)
-        {
-            <tr>
+
+            @if (Model.TranslationResult.DeeplResponse != null)
+            {
                 <td>@Model.TranslationResult.DeeplResponse.Text</td>
-            </tr>
+            }
+        </tr>
         }
         </tbody>
     </table>

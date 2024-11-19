@@ -25,16 +25,16 @@ public class TranslateController : ControllerBase
     }
 
     [HttpGet("translate")]
-    public async Task<ActionResult<TranslationModel>> Translate([FromQuery] string text, [FromQuery] string target)
+    public async Task<ActionResult<TranslationModel>> Translate([FromQuery] string text)
     {
-        if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(target))
+        if (string.IsNullOrWhiteSpace(text))
         {
             return BadRequest("Text and target language must be provided.");
         }
 
         try
         {
-            var translationResult = await _translationService.Translate(text, target);
+            var translationResult = await _translationService.Translate(text);
             return Ok(translationResult);
         }
         catch (Exception ex)

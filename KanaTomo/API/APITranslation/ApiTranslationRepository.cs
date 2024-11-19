@@ -10,7 +10,7 @@ namespace KanaTomo.API.APITranslation;
 
 public interface IApiTranslationRepository
 {
-    Task<TranslationModel> GetTranslationsAsync(string text, string target);
+    Task<TranslationModel> GetTranslationsAsync(string text);
 }
 
 public class ApiTranslationRepository : IApiTranslationRepository
@@ -27,11 +27,11 @@ public class ApiTranslationRepository : IApiTranslationRepository
         this.configuration = configuration;
     }
 
-    public async Task<TranslationModel> GetTranslationsAsync(string text, string target)
+    public async Task<TranslationModel> GetTranslationsAsync(string text)
     {
-        _logger.LogInformation($"Fetching translations for text: {text} to {target}");
+        _logger.LogInformation($"Fetching translations for text: {text}");
 
-        var translationModel = new TranslationModel(text, target);
+        var translationModel = new TranslationModel(text);
     
         try
         {

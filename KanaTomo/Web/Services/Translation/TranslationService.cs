@@ -12,8 +12,8 @@ public class TranslationService : ITranslationService
         _repository = repository;
     }
 
-    public async Task<TranslationModel> Translate(string text, string targetLanguage)
+    public async Task<TranslationModel> Translate(string text)
     {
-        return await _repository.TranslateAsync(text, targetLanguage);
+        return await _repository.TranslateAsync(text);
     }
 }
