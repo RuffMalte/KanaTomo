@@ -1,6 +1,7 @@
 using System.Net.Http;
 using DeepL;
 using DeepL.Model;
+using KanaTomo.Helper;
 using KanaTomo.Models.Translation;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -62,6 +63,7 @@ public class ApiTranslationRepository : IApiTranslationRepository
 
     private async Task<JishoResponse?> GetJishoTranslationAsync(string keyword)
     {
+        //needs no lng detection, because the api will.
         var response = await _httpClient.GetStringAsync($"{JishoApiUrl}{Uri.EscapeDataString(keyword)}");
         if (string.IsNullOrWhiteSpace(response))
         {
@@ -82,14 +84,39 @@ public class ApiTranslationRepository : IApiTranslationRepository
             return null;
         }
 
-        var translator = new Translator(deepLApiKey);
-        var result = await translator.TranslateTextAsync(
-            text,
-            LanguageCode.English,
-            LanguageCode.Japanese,
-            new TextTranslateOptions { Formality = formailties[4] }
-        );
+        var languageDetector = new LanguageFinder();
+        var sourceLanguage = languageDetector.DetectLanguage(text);
+    
+        if (sourceLanguage == null)
+        {
+            _logger.LogError("Unable to detect language");
+            return null;
+        }
+
+        _logger.LogInformation("Detected language: " + sourceLanguage);
         
-        return result;
+        var sourceLanguageCode = sourceLanguage == "en-US" ? LanguageCode.English : LanguageCode.Japanese;
+        _logger.LogInformation("Source language code: " + sourceLanguageCode);
+        var targetLanguageCode = sourceLanguage == "en-US" ? LanguageCode.Japanese : LanguageCode.EnglishAmerican;
+        _logger.LogInformation("Target language code: " + targetLanguageCode);
+        
+        try
+        {
+            var translator = new Translator(deepLApiKey);
+            var result = await translator.TranslateTextAsync(
+                text,
+                sourceLanguageCode,
+                targetLanguageCode,
+                new TextTranslateOptions { Formality = formailties[4] }
+            );
+            _logger.LogInformation(JsonSerializer.Serialize(result));
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return null;
+        }
     }
 }
