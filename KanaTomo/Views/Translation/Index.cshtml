@@ -31,7 +31,7 @@
     <button type="submit" class="btn btn-primary">Translate</button>
 </form>
 
-@if (Model.TranslationResult != null && Model.TranslationResult.JishoResponse != null)
+@if (Model.TranslationResult != null)
 {
     <h3 class="mt-4">Translation Results:</h3>
     <table class="table table-bordered">
@@ -41,16 +41,23 @@
             <th>Japanese Word</th>
             <th>Reading</th>
             <th>Slug</th>
+            <th>Deepl Translation</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var data in Model.TranslationResult.JishoResponse.Data)
         {
+        <tr>
+            <td>@Model.TranslationResult.OriginalText</td>
+            <td>@(data.Japanese.FirstOrDefault()?.Word ?? "")</td>
+            <td>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</td>
+            <td>@data.Slug</td>
+        </tr>
+        }
+        @if (Model.TranslationResult.DeeplResponse != null)
+        {
             <tr>
-                <td>@Model.TranslationResult.OriginalText</td>
-                <td>@(data.Japanese.FirstOrDefault()?.Word ?? "")</td>
-                <td>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</td>
-                <td>@data.Slug</td>
+                <td>@Model.TranslationResult.DeeplResponse.Text</td>
             </tr>
         }
         </tbody>

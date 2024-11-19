@@ -1,4 +1,5 @@
 using KanaTomo.API.APITranslation;
+using KanaTomo.Helper;
 using KanaTomo.Web.Repositories;
 using KanaTomo.Web.Services;
 using KanaTomo.Web.Repositories.Translation;
@@ -57,6 +58,10 @@ builder.Services.AddScoped<IApiTranslationService, ApiTranslationService>();
 
 
 // Add configuration
+if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")))
+{
+    EnvReader.Load(".env");
+}
 builder.Configuration.AddEnvironmentVariables();
 
 var app = builder.Build();

@@ -1,16 +1,23 @@
 using System.ComponentModel.DataAnnotations;
+using DeepL.Model;
 
 namespace KanaTomo.Models.Translation;
 
+using System.Text.Json.Serialization;
+
 public class TranslationModel
 {
+    [JsonPropertyName("originalText")]
     public string OriginalText { get; set; }
+
+    [JsonPropertyName("targetLanguage")]
     public string TargetLanguage { get; set; }
+
+    [JsonPropertyName("jishoResponse")]
     public JishoResponse JishoResponse { get; set; }
-    
-    // Placeholder for future implementations
-    // public GoogleResponse GoogleResponse { get; set; }
-    // public DeeplResponse DeeplResponse { get; set; }
+
+    [JsonPropertyName("deeplResponse")]
+    public DeeplResponseModel DeeplResponse { get; set; }
 
     public TranslationModel(string originalText, string targetLanguage)
     {

@@ -8,21 +8,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="moved model folder">
-      <change afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/JishoResponseModel.cs" afterDir="false" />
+    <list default="true" id="b7050f1c-f502-400a-a152-10ee6d5a3ec6" name="Changes" comment="jisho api support">
+      <change afterPath="$PROJECT_DIR$/KanaTomo/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Helper/EnvReader.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/DeeplResponseModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/http-client.env.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KanaTomo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/KanaTomo.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Models/Translation/TranslationModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/ViewModels/TranslationViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Views/Translation/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Translation/TranslationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Controllers/Translation/TranslationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/ITranslationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/ITranslationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,17 +31,26 @@
   <component name="DpaMonitoringSettings">
     <option name="autoShow" value="false" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTTP Public Environment File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f799e12d4164fa381460460b136f7e2c40400/6f/4a0e823a/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a03231e326744c6799593728eb03830112800/6a/59072b65/Translator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a03231e326744c6799593728eb03830112800/ea/29313ded/TextResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f245cf881f97452cb8c1b0e94d54df4e32400/8a/661a63af/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81427bb79ca4dd8b7472ec794faaa3c413e68ebdba20182846a49537f18fca64/SwaggerGenServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/mr/RiderProjects/KanaTomo/KanaTomo/API/APITranslation/ApiTranslationRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KanaTomo/API/APITranslation/ApiTranslationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KanaTomo/API/APITranslation/TranslateController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/mr/RiderProjects/KanaTomo/KanaTomo/Controllers/TranslationAPI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/mr/RiderProjects/KanaTomo/KanaTomo/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KanaTomo/Web/Repositories/Translation/TranslationRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KanaTomo/Web/Services/Translation/TranslationService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -77,10 +85,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "HotReloadSettingsPage",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Config"
+    ],
     "rider.external.source.directories": [
       "/Users/mr/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
       "/Users/mr/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
@@ -178,7 +189,8 @@
       <workItem from="1731064397246" duration="14348000" />
       <workItem from="1731229679164" duration="7737000" />
       <workItem from="1731237810336" duration="99000" />
-      <workItem from="1731237919562" duration="28494000" />
+      <workItem from="1731237919562" duration="41335000" />
+      <workItem from="1731921541107" duration="25745000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -252,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731328657250</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="jisho api support">
+      <option name="closed" value="true" />
+      <created>1731339391694</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731339391694</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,7 +290,8 @@
     <MESSAGE value="reorderd structured" />
     <MESSAGE value="reorderd folders" />
     <MESSAGE value="moved model folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved model folder" />
+    <MESSAGE value="jisho api support" />
+    <option name="LAST_COMMIT_MESSAGE" value="jisho api support" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

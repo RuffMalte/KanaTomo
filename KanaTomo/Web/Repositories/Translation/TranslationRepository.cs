@@ -6,19 +6,27 @@ namespace KanaTomo.Web.Repositories.Translation;
 public class TranslationRepository : ITranslationRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly string _apiBaseUrl;
 
     public TranslationRepository(IHttpClientFactory httpClientFactory, IConfiguration configuration)
     {
         _httpClient = httpClientFactory.CreateClient();
-        _apiBaseUrl = configuration["ApiBaseUrl"] ?? "http://localhost:5070/api/v1/translate";
     }
 
     public async Task<TranslationModel> TranslateAsync(string text, string targetLanguage)
     {
-        var response = await _httpClient.GetAsync($"{_apiBaseUrl}/translate?text={Uri.EscapeDataString(text)}&target={targetLanguage}");
+        var baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) ? "http://localhost:5070" : "http://host.docker.internal:5070";
+        
+        var response = await _httpClient.GetAsync($"{baseUrl}/api/v1/translate/translate?text={Uri.EscapeDataString(text)}&target={targetLanguage}");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<TranslationModel>(content);
+        
+        var settings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore
+        };
+        
+        var model = JsonConvert.DeserializeObject<TranslationModel>(content, settings);
+        return model;
     }
 }
