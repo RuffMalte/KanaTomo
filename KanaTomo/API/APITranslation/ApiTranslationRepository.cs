@@ -30,23 +30,29 @@ public class ApiTranslationRepository : IApiTranslationRepository
     public async Task<TranslationModel> GetTranslationsAsync(string text)
     {
         _logger.LogInformation($"Fetching translations for text: {text}");
-
         var translationModel = new TranslationModel(text);
-    
+
         try
         {
-            var deeplResult = await GetDeeplTranslationAsync(text);
+            var deeplTask = GetDeeplTranslationAsync(text);
+            var jishoTask = GetJishoTranslationAsync(text);
+            
+            await Task.WhenAll(deeplTask, jishoTask);
+
+            // Process DeepL result
+            var deeplResult = await deeplTask;
             if (deeplResult != null)
             {
-                translationModel.DeeplResponse = new DeeplResponseModel() 
+                translationModel.DeeplResponse = new DeeplResponseModel()
                 {
                     Text = deeplResult.Text,
                     DetectedSourceLanguage = deeplResult.DetectedSourceLanguageCode,
                     BilledCharacters = deeplResult.BilledCharacters
                 };
             }
-            
-            var jishoResult = await GetJishoTranslationAsync(text);
+
+            // Process Jisho result
+            var jishoResult = await jishoTask;
             if (jishoResult != null)
             {
                 translationModel.JishoResponse = jishoResult;
@@ -54,10 +60,10 @@ public class ApiTranslationRepository : IApiTranslationRepository
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error occurred while fetching DeepL translation");
-            throw new Exception($"Error in DeepL translation: {e.Message}", e);
+            _logger.LogError(e, "Error occurred while fetching translations");
+            throw new Exception($"Error in translation: {e.Message}", e);
         }
-    
+
         return translationModel;
     }
 
