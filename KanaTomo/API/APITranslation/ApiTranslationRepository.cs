@@ -35,14 +35,21 @@ public class ApiTranslationRepository : IApiTranslationRepository
         try
         {
             var deeplResult = await GetDeeplTranslationAsync(text);
-            translationModel.DeeplResponse = new DeeplResponseModel() 
+            if (deeplResult != null)
             {
-                Text = deeplResult.Text,
-                DetectedSourceLanguage = deeplResult.DetectedSourceLanguageCode,
-                BilledCharacters = deeplResult.BilledCharacters
-            };
+                translationModel.DeeplResponse = new DeeplResponseModel() 
+                {
+                    Text = deeplResult.Text,
+                    DetectedSourceLanguage = deeplResult.DetectedSourceLanguageCode,
+                    BilledCharacters = deeplResult.BilledCharacters
+                };
+            }
             
-            translationModel.JishoResponse = await GetJishoTranslationAsync(text);
+            var jishoResult = await GetJishoTranslationAsync(text);
+            if (jishoResult != null)
+            {
+                translationModel.JishoResponse = jishoResult;
+            }
         }
         catch (Exception e)
         {
@@ -53,17 +60,28 @@ public class ApiTranslationRepository : IApiTranslationRepository
         return translationModel;
     }
 
-    private async Task<JishoResponse> GetJishoTranslationAsync(string keyword)
+    private async Task<JishoResponse?> GetJishoTranslationAsync(string keyword)
     {
         var response = await _httpClient.GetStringAsync($"{JishoApiUrl}{Uri.EscapeDataString(keyword)}");
+        if (string.IsNullOrWhiteSpace(response))
+        {
+            _logger.LogError("Jisho API returned an empty response.");
+            return null;
+        }
         return JsonSerializer.Deserialize<JishoResponse>(response);
     }
 
-    private async Task<TextResult> GetDeeplTranslationAsync(string text)
+    private async Task<TextResult?> GetDeeplTranslationAsync(string text)
     {
         var formailties = new[] { Formality.PreferLess, Formality.Less, Formality.Default, Formality.More, Formality.PreferMore };
         
         var deepLApiKey = this.configuration["deeplApiKey"] ?? Environment.GetEnvironmentVariable("deeplApiKey") ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(deepLApiKey))
+        {
+            _logger.LogError("DeepL API key is not set. Please set the deeplApiKey environment variable, but does not have to be set, if you do not want to use DeepL translation.");
+            return null;
+        }
+
         var translator = new Translator(deepLApiKey);
         var result = await translator.TranslateTextAsync(
             text,
