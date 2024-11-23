@@ -26,12 +26,14 @@ public class TranslationController : Controller
             try
             {
                 model.TranslationResult = await _translationService.Translate(model.TextToTranslate);
+                TempData["LastSearch"] = model.TextToTranslate;
             }
             catch (HttpRequestException ex)
             {
                 ModelState.AddModelError("", $"An error occurred while translating: {ex.Message}");
             }
         }
+
         return View("Index", model);
     }
 }

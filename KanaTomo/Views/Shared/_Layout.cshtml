@@ -29,6 +29,14 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Translation" asp-action="Index">Translate</a>
                     </li>
                 </ul>
+                <form class="d-flex" asp-controller="Translation" asp-action="Translate" method="post">
+                    <input class="form-control me-2" type="text" placeholder="Text to Translate"
+                           aria-label="Translate" name="TextToTranslate"
+                           value="@TempData["LastSearch"]">
+                    <button class="btn btn-outline-success" type="submit">
+                        Translate
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
