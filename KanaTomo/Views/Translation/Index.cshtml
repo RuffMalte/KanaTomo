@@ -1,56 +1,83 @@
 @model KanaTomo.ViewModels.TranslationViewModel
 
-<h2>Translation</h2>
-
-@if (!ViewData.ModelState.IsValid)
-{
-<div class="alert alert-danger">
-    <ul>
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-        <li>@error.ErrorMessage</li>
-        }
-    </ul>
-</div>
-}
-
-<form asp-controller="Translation" asp-action="Translate" method="post">
-    <div class="form-group">
-        <label asp-for="TextToTranslate">Text to Translate</label>
-        <textarea asp-for="TextToTranslate" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="TextToTranslate" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <form asp-controller="Translation" asp-action="Translate" method="post">
+                <div class="input-group input-group-lg mb-3">
+                    <input asp-for="TextToTranslate" type="text" class="form-control" placeholder="Translate..." aria-label="Search">
+                    <button class="btn btn-primary" type="submit">
+                        Translate
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Translate</button>
-</form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+            <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+    }
+
+
+
+    @if (Model.TranslationResult != null)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Left column (2/3 width) -->
+                @foreach (var data in Model.TranslationResult.JishoResponse.Data)
+                {
+                    
+                    <div class="alert alert-success mb-4" role="alert">
+                        <a>@Model.TranslationResult.OriginalText</a>
+                        <a>@(data.Japanese.FirstOrDefault()?.Word ?? "")</a>
+                        <a>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</a>
+                        <a>@data.Slug</a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-4">
+                <!-- Right column (1/3 width) -->
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="alert alert-primary mb-4" role="alert">
+                        @if (Model.TranslationResult.DeeplResponse != null)
+                        {
+                            <partial name="Items/DeeplDataItem" model="new KanaTomo.Models.Translation.DeeplResponseModel()
+                                     {
+                                         Text = Model.TranslationResult.DeeplResponse.Text,
+                                         BilledCharacters = Model.TranslationResult.DeeplResponse.BilledCharacters,
+                                         DetectedSourceLanguage = Model.TranslationResult.DeeplResponse.DetectedSourceLanguage, 
+                                         ModelTypeUsed = Model.TranslationResult.DeeplResponse.ModelTypeUsed,
+                                     }         
+                                     "/>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
 
 @if (Model.TranslationResult != null)
 {
-    <h3 class="mt-4">Translation Results:</h3>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Original Text</th>
-            <th>Japanese Word</th>
-            <th>Reading</th>
-            <th>Slug</th>
-            <th>Deepl Translation</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var data in Model.TranslationResult.JishoResponse.Data)
-        {
-        <tr>
-            <td>@Model.TranslationResult.OriginalText</td>
-            <td>@(data.Japanese.FirstOrDefault()?.Word ?? "")</td>
-            <td>@(data.Japanese.FirstOrDefault()?.Reading ?? "")</td>
-            <td>@data.Slug</td>
-
-            @if (Model.TranslationResult.DeeplResponse != null)
-            {
-                <td>@Model.TranslationResult.DeeplResponse.Text</td>
-            }
-        </tr>
-        }
-        </tbody>
-    </table>
+    @foreach (var item in Model.TranslationResult.JishoResponse.Data)
+    {
+        <partial name="Items/JishoDataItem" model='new KanaTomo.Models.Translation.JishoData()
+                 {
+                     Slug = item.Slug,
+                 }' />
+    }
 }
