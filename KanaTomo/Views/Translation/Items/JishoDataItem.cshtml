@@ -1,5 +1,59 @@
 @model KanaTomo.Models.Translation.JishoData
 
-<tr>
-    <td style="color: red">@Model.Slug</td>
-</tr>
+<div class="row alert alert-success mb-4">
+    <div class="col-md-8">
+        <ol class="list-group list-group-numbered">
+            @if (Model?.Japanese != null)
+            {
+                @foreach (var japanese in Model.Japanese)
+                {
+                    <li class="list-group-item list-group-item-success">
+                        <a>@japanese.Word</a>
+                        <a>@japanese.Reading</a>
+                    </li>
+                }
+            }
+        </ol>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex flex-column align-items-center p-2">
+            @if (Model?.Japanese?.FirstOrDefault()?.Reading != null)
+            {
+                <p class="h6">@Model.Japanese.First().Reading</p>
+            }
+            <p class="h3">@Model?.Slug</p>
+            
+            @if(Model?.IsCommon ?? false)
+            {
+                <span class="badge bg-success mb-2">Common</span>
+            }
+            
+            <!-- Display tags -->
+            @if(Model?.Tags != null)
+            {
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="badge bg-primary me-1 mb-2">
+                        @if (tag.StartsWith("wanikani", StringComparison.OrdinalIgnoreCase))
+                        {
+                            @("WaniKani level " + tag.Substring(8))
+                        }
+                        else
+                        {
+                            @tag
+                        }
+                    </span>
+                }
+            }
+            
+            @if (Model?.Jlpt != null)
+            {
+                @foreach(var jlpt in Model.Jlpt)
+                {
+                    <span class="badge bg-primary">@jlpt</span>
+                }
+            }
+        </div>
+    </div>
+
+</div>
