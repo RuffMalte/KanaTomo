@@ -3,13 +3,22 @@
 <div class="row alert alert-success mb-4">
     <div class="col-md-8">
         <ol class="list-group list-group-numbered">
-            @if (Model?.Japanese != null)
+            @if (Model?.Senses != null)
             {
-                @foreach (var japanese in Model.Japanese)
+                @foreach (var sense in Model.Senses)
                 {
-                    <li class="list-group-item list-group-item-success">
-                        <a>@japanese.Word</a>
-                        <a>@japanese.Reading</a>
+                    @if (sense?.EnglishDefinitions == null || sense?.PartsOfSpeech == null)
+                    {
+                        continue;
+                    }
+                    
+                    <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-success">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold h5">
+                                <p>@string.Join(", ", sense.EnglishDefinitions)</p>
+                            </div>
+                            <p class="fst-italic fs-6">@string.Join(", ", sense.PartsOfSpeech)</p>
+                        </div>
                     </li>
                 }
             }

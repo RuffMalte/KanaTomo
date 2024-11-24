@@ -1,5 +1,6 @@
+using System.Text.Json;
 using KanaTomo.Models.Translation;
-using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace KanaTomo.Web.Repositories.Translation;
 
@@ -20,13 +21,13 @@ public class TranslationRepository : ITranslationRepository
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         
-        var settings = new JsonSerializerSettings
+        var options = new JsonSerializerOptions
         {
-            NullValueHandling = NullValueHandling.Ignore,
-            MissingMemberHandling = MissingMemberHandling.Ignore
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
+        var model = JsonSerializer.Deserialize<TranslationModel>(content, options);
         
-        var model = JsonConvert.DeserializeObject<TranslationModel>(content, settings);
         return model;
     }
 }
