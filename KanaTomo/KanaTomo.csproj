@@ -15,14 +15,16 @@
 
     <ItemGroup>
       <PackageReference Include="DeepL.net" Version="1.11.0" />
-      <PackageReference Include="LanguageDetection.NETStandard" Version="1.3.1" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Web\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="API\User\UserController.cs" />
     </ItemGroup>
 
 </Project>
