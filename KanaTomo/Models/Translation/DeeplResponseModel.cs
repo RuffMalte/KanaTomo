@@ -1,18 +1,18 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace KanaTomo.Models.Translation;
 
 public class DeeplResponseModel
 {
-    [JsonProperty("text")]
+    [JsonPropertyName("text")]
     public string Text { get; set; }
 
-    [JsonProperty("detected_source_language")]
+    [JsonPropertyName("detected_source_language")]
     public string DetectedSourceLanguage { get; set; }
 
-    [JsonProperty("billed_characters")]
+    [JsonPropertyName("billed_characters")]
     public int BilledCharacters { get; set; }
 
-    [JsonProperty("model_type_used")]
+    [JsonPropertyName("model_type_used")]
     public string ModelTypeUsed { get; set; }
 }

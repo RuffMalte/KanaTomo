@@ -3,7 +3,6 @@ using DeepL;
 using DeepL.Model;
 using KanaTomo.Helper;
 using KanaTomo.Models.Translation;
-using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace KanaTomo.API.APITranslation;
