@@ -49,14 +49,10 @@
             </div>
             <div class="col-md-4">
                 <!-- Right column (1/3 width) -->
-                <div class="sticky-top" style="top: 20px;">
-                    <div class="alert alert-primary mb-4" role="alert">
-                        @if (Model.TranslationResult.DeeplResponse != null)
-                        {
-                            <partial name="Items/DeeplDataItem" model="Model.TranslationResult.DeeplResponse"/>
-                        }
-                    </div>
-                </div>
+                @if (Model.TranslationResult.DeeplResponse != null)
+                {
+                    <partial name="Items/DeeplDataItem" model="Model.TranslationResult.DeeplResponse"/>
+                }
             </div>
         </div>
     }
