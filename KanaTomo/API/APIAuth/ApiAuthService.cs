@@ -55,7 +55,7 @@ public class ApiAuthService : IApiAuthService
     private string GenerateJwtToken(UserModel user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
+        var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("jwtSecret"));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
