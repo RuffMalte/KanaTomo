@@ -14,13 +14,24 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
       <PackageReference Include="DeepL.net" Version="1.11.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.20" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Migrations\" />
       <Folder Include="Web\" />
+      <Folder Include="Web\Controllers\User\" />
     </ItemGroup>
 
     <ItemGroup>

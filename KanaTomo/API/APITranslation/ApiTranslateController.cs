@@ -7,12 +7,12 @@ namespace KanaTomo.API.APITranslation;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [Produces("application/json")]
-public class TranslateController : ControllerBase
+public class ApiTranslateController : ControllerBase
 {
     private readonly IApiTranslationService _translationService;
-    private readonly ILogger<TranslateController> _logger;
+    private readonly ILogger<ApiTranslateController> _logger;
 
-    public TranslateController(IApiTranslationService translationService, ILogger<TranslateController> logger)
+    public ApiTranslateController(IApiTranslationService translationService, ILogger<ApiTranslateController> logger)
     {
         _translationService = translationService;
         _logger = logger;

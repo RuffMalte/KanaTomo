@@ -19,6 +19,7 @@ public class TranslationController : Controller
     }
 
     [HttpPost]
+    [Route("translation")]
     public async Task<IActionResult> Translate(TranslationViewModel model)
     {
         if (ModelState.IsValid)

@@ -17,7 +17,7 @@ public class TranslationRepository : ITranslationRepository
     {
         var baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) ? "http://localhost:5070" : "http://host.docker.internal:5070";
         
-        var response = await _httpClient.GetAsync($"{baseUrl}/api/v1/translate/translate?text={Uri.EscapeDataString(text)}");
+        var response = await _httpClient.GetAsync($"{baseUrl}/api/v1/apitranslate/translate?text={Uri.EscapeDataString(text)}");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         
