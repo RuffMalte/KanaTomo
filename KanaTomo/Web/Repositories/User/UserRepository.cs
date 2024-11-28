@@ -49,8 +49,19 @@ public class UserRepository : IUserRepository
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         var response = await _httpClient.PutAsJsonAsync($"{_baseUrl}/api/v1/apiusers/{user.Id}", user);
+        
+        if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            throw new UnauthorizedAccessException("Unauthorized to update user");
+        }
+        
+        var result = await response.Content.ReadFromJsonAsync<UserModel>();
+        
+        if (result == null)
+        {
+            throw new Exception("Failed to update user");
+        }
 
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<UserModel>();
+        return result;
     }
 }

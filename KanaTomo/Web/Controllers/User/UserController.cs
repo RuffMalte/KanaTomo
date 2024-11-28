@@ -37,27 +37,55 @@ public class UserController: Controller
         catch (Exception ex)
         {
             _logger.LogError(ex, "An error occurred while fetching the current user");
-            return RedirectToAction("Error");
+            return RedirectToAction("Error", "Home");
         } 
     }
     
-    [Authorize]
+    
+    [HttpGet("edit")]
+    public async Task<IActionResult> Edit()
+    {
+        try
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            return View(currentUser);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching the current user for editing");
+            return RedirectToAction("Error", "Home");
+        }
+    }
+    
     [HttpPost("update")]
     public async Task<IActionResult> Update(UserModel user)
     {
-        if (ModelState.IsValid)
+        try
         {
-            try
+            var currentUser = await _userService.GetCurrentUserAsync();
+            if (currentUser == null)
             {
-                var updatedUser = await _userService.UpdateUserAsync(user);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Auth");
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Update failed: " + ex.Message);
-            }
-        }
 
-        return RedirectToAction("Index", "Home");
+            // Only update allowed fields
+            currentUser.Username = user.Username;
+            currentUser.Email = user.Email;
+            currentUser.Bio = user.Bio;
+            currentUser.ProfilePictureUrl = user.ProfilePictureUrl;
+
+            var updatedUser = await _userService.UpdateUserAsync(currentUser);
+            return RedirectToAction("Me");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while updating the user");
+            ModelState.AddModelError(string.Empty, "Update failed: " + ex.Message);
+            return View("Edit", user);
+        }
     }
 }

@@ -41,7 +41,26 @@ public class ApiUserRepository : IApiUserRepository
     public async Task UpdateUserAsync(UserModel user)
     {
         _context.Entry(user).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!await UserExists(user.Id))
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            else
+            {
+                throw;
+            }
+        }
+    }
+
+    private async Task<bool> UserExists(Guid id)
+    {
+        return await _context.Users.AnyAsync(e => e.Id == id);
     }
 
     public async Task DeleteUserAsync(Guid id)

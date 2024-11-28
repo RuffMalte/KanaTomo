@@ -2,6 +2,7 @@ using System.Security.Claims;
 using KanaTomo.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KanaTomo.API.APIUser;
 
@@ -48,12 +49,38 @@ public class ApiUsersController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(Guid id, UserModel user)
     {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null || id != Guid.Parse(userId))
+        {
+            return Unauthorized();
+        }
+
         if (id != user.Id)
         {
-            return BadRequest();
+            user.Id = id; // Ensure the ID matches
         }
-        await _userService.UpdateUserAsync(user);
-        return NoContent();
+
+        try
+        {
+            await _userService.UpdateUserAsync(user);
+            return Ok(user);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!await UserExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+    }
+
+    private async Task<bool> UserExists(Guid id)
+    {
+        return await _userService.GetUserByIdAsync(id) != null;
     }
     
     [Authorize]

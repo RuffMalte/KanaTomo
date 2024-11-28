@@ -23,7 +23,7 @@ ViewData["Title"] = "User Profile";
                     <p class="text-muted mb-1">Level @Model.Level</p>
                     <p class="text-muted mb-4">@Model.XP XP / @Model.NextLevelXP XP</p>
                     <div class="d-flex justify-content-center mb-2">
-                        <button type="button" class="btn btn-primary">Edit Profile</button>
+                        <a asp-controller="User" asp-action="Edit" class="btn btn-primary">Edit Profile</a>
                         <form action="@Url.Action("Logout", "Auth")" method="post" class="ms-2">
                             <button type="submit" class="btn btn-outline-danger">Logout</button>
                         </form>

@@ -7,7 +7,7 @@ public interface IApiUserService
     Task<IEnumerable<UserModel>> GetAllUsersAsync();
     Task<UserModel> GetUserByIdAsync(Guid id);
     Task<UserModel> CreateUserAsync(UserModel user);
-    Task UpdateUserAsync(UserModel user);
+    Task<UserModel> UpdateUserAsync(UserModel user);
     Task DeleteUserAsync(Guid id);
 }
 
@@ -36,9 +36,22 @@ public class ApiUserService : IApiUserService
         return await _userRepository.CreateUserAsync(user);
     }
 
-    public async Task UpdateUserAsync(UserModel user)
+    public async Task<UserModel> UpdateUserAsync(UserModel user)
     {
-        await _userRepository.UpdateUserAsync(user);
+        var existingUser = await _userRepository.GetUserByIdAsync(user.Id);
+        if (existingUser == null)
+        {
+            throw new KeyNotFoundException("User not found");
+        }
+
+        // Update only the fields that are allowed to be changed
+        existingUser.Username = user.Username;
+        existingUser.Email = user.Email;
+        existingUser.Bio = user.Bio;
+        existingUser.ProfilePictureUrl = user.ProfilePictureUrl;
+
+        await _userRepository.UpdateUserAsync(existingUser);
+        return existingUser;
     }
 
     public async Task DeleteUserAsync(Guid id)
