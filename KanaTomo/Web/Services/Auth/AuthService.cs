@@ -17,8 +17,8 @@ public class AuthService : IAuthService
         return await _authRepository.LoginAsync(username, password);
     }
 
-    public async Task<string> RegisterAsync(string username, string password)
+    public async Task<string> RegisterAsync(string username, string password, string email)
     {
-        return await _authRepository.RegisterAsync(username, password);
+        return await _authRepository.RegisterAsync(username, password, email);
     }
 }

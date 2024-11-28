@@ -9,7 +9,7 @@ namespace KanaTomo.API.APIAuth;
 public interface IApiAuthService
 {
     Task<string> LoginAsync(string username, string password);
-    Task<string> RegisterAsync(string username, string password);
+    Task<string> RegisterAsync(string username, string password, string email);
 }
 
 public class ApiAuthService : IApiAuthService
@@ -34,7 +34,7 @@ public class ApiAuthService : IApiAuthService
         return GenerateJwtToken(user);
     }
 
-    public async Task<string> RegisterAsync(string username, string password)
+    public async Task<string> RegisterAsync(string username, string password, string email)
     {
         var existingUser = await _authRepository.GetUserByUsernameAsync(username);
         if (existingUser != null)
@@ -45,10 +45,13 @@ public class ApiAuthService : IApiAuthService
         var newUser = new UserModel
         {
             Username = username,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            Email = email,
+            LastLoginDate = DateTime.UtcNow,
+            LastActivityDate = DateTime.UtcNow
         };
 
-        var createdUser = await _authRepository.CreateUserAsync(newUser, password);
+        var createdUser = await _authRepository.CreateUserAsync(newUser, password, email);
         return GenerateJwtToken(createdUser);
     }
 

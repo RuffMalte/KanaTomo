@@ -61,7 +61,7 @@ public class AuthController : Controller
         {
             try
             {
-                var token = await _authService.RegisterAsync(model.Username, model.Password);
+                var token = await _authService.RegisterAsync(model.Username, model.Password, model.Email);
             
                 // Save the token in a cookie
                 Response.Cookies.Append("AuthToken", token, new CookieOptions

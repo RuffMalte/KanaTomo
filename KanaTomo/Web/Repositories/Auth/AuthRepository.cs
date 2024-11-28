@@ -26,9 +26,9 @@ public class AuthRepository : IAuthRepository
         return result.Token;
     }
 
-    public async Task<string> RegisterAsync(string username, string password)
+    public async Task<string> RegisterAsync(string username, string password, string email)
     {
-        var registerDto = new RegisterDto { Username = username, Password = password };
+        var registerDto = new RegisterDto { Username = username, Password = password, Email = email };
         var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/v1/apiauth/register", registerDto);
         response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadFromJsonAsync<LoginResponse>();

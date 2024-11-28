@@ -6,7 +6,7 @@ namespace KanaTomo.API.APIAuth;
 public interface IApiAuthRepository
 {
     Task<UserModel> GetUserByUsernameAsync(string username);
-    Task<UserModel> CreateUserAsync(UserModel user, string password);
+    Task<UserModel> CreateUserAsync(UserModel user, string password, string email);
 }
 
 public class ApiAuthRepository : IApiAuthRepository
@@ -23,7 +23,7 @@ public class ApiAuthRepository : IApiAuthRepository
         return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
     }
 
-    public async Task<UserModel> CreateUserAsync(UserModel user, string password)
+    public async Task<UserModel> CreateUserAsync(UserModel user, string password, string email)
     {
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         _context.Users.Add(user);

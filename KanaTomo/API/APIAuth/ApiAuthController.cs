@@ -35,7 +35,7 @@ public class ApiAuthController : ControllerBase
     {
         try
         {
-            var token = await _authService.RegisterAsync(registerDto.Username, registerDto.Password);
+            var token = await _authService.RegisterAsync(registerDto.Username, registerDto.Password, registerDto.Email);
             return Ok(new { token });
         }
         catch (Exception ex)
@@ -55,4 +55,6 @@ public class RegisterDto
 {
     public string Username { get; set; }
     public string Password { get; set; }
+    
+    public string Email { get; set; }
 }
