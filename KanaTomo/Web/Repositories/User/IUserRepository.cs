@@ -8,4 +8,6 @@ public interface IUserRepository
     Task<UserModel> GetCurrentUserAsync();
     
     Task<UserModel?> UpdateUserAsync(UserModel user);
+    
+    Task DeleteUserAsync(Guid id);
 }

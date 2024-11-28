@@ -88,4 +88,25 @@ public class UserController: Controller
             return View("Edit", user);
         }
     }
+    
+    [HttpPost("delete")]
+    public async Task<IActionResult> Delete()
+    {
+        try
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+        
+            await _userService.DeleteUserAsync(currentUser.Id);
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while deleting the current user");
+            return RedirectToAction("Error", "Home");
+        }
+    }
 }

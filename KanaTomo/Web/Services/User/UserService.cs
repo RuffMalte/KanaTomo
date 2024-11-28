@@ -22,4 +22,9 @@ public class UserService : IUserService
     {
         return await _userRepository.UpdateUserAsync(user);
     }
+    
+    public async Task DeleteUserAsync(Guid userId)
+    {
+        await _userRepository.DeleteUserAsync(userId);
+    }
 }
