@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using KanaTomo.Models.User;
+using KanaTomo.Web.Services.User;
 
 namespace KanaTomo.Web.Repositories.User;
 
@@ -18,7 +19,7 @@ public class UserRepository : IUserRepository
             : "http://host.docker.internal:5070";
     }
 
-    public async Task<UserModel> GetCurrentUserAsync()
+    public async Task<UserModel?> GetCurrentUserAsync()
     {
         var token = _httpContextAccessor.HttpContext.Request.Cookies["AuthToken"];
         if (string.IsNullOrEmpty(token))
@@ -33,6 +34,21 @@ public class UserRepository : IUserRepository
         {
             return null;
         }
+
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<UserModel>();
+    }
+
+    public async Task<UserModel> UpdateUserAsync(UserModel user)
+    {
+        var token = _httpContextAccessor.HttpContext.Request.Cookies["AuthToken"];
+        if (string.IsNullOrEmpty(token))
+        {
+            throw new UnauthorizedAccessException("No authentication token found");
+        }
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var response = await _httpClient.PutAsJsonAsync($"{_baseUrl}/api/v1/apiusers/{user.Id}", user);
 
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<UserModel>();

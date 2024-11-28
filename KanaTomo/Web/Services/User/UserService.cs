@@ -13,8 +13,13 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<UserModel> GetCurrentUserAsync()
+    public async Task<UserModel?> GetCurrentUserAsync()
     {
         return await _userRepository.GetCurrentUserAsync();
+    }
+    
+    public async Task<UserModel> UpdateUserAsync(UserModel user)
+    {
+        return await _userRepository.UpdateUserAsync(user);
     }
 }

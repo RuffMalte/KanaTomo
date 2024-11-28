@@ -1,0 +1,136 @@
+@using Microsoft.IdentityModel.Tokens
+@model KanaTomo.Models.User.UserModel
+@{
+ViewData["Title"] = "User Profile";
+}
+
+@if (ViewData.ModelState.IsValid)
+{
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    @if (Model.ProfilePictureUrl == null)
+                    {
+                        <i class="bi bi-emoji-laughing-fill" style="font-size: 8rem;"></i>
+                    }
+                    else
+                    {
+                        <img src="@Model.ProfilePictureUrl" alt="avatar" class="rounded-circle img-fluid" style="font-size: 8rem;">
+                    }
+                    <h5 class="my-3">@Model.Username</h5>
+                    <p class="text-muted mb-1">Level @Model.Level</p>
+                    <p class="text-muted mb-4">@Model.XP XP / @Model.NextLevelXP XP</p>
+                    <div class="d-flex justify-content-center mb-2">
+                        <button type="button" class="btn btn-primary">Edit Profile</button>
+                        <form action="@Url.Action("Logout", "Auth")" method="post" class="ms-2">
+                            <button type="submit" class="btn btn-outline-danger">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <i class="fas fa-calendar-alt fa-lg" style="color: #333333;"></i>
+                            <p class="mb-0">Joined: @Model.CreatedAt.ToShortDateString()</p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <i class="fas fa-clock fa-lg" style="color: #55acee;"></i>
+                            <p class="mb-0">Last Login: @Model.LastLoginDate.ToShortDateString()</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="mb-4">User Information</h2>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Username</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">@Model.Username</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">@Model.Email</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Bio</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">@Model.Bio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4 mb-md-0">
+                        <div class="card-body">
+                            <h5 class="mb-4">Activity Statistics</h5>
+                            <p class="mb-1" style="font-size: .77rem;">Total Logins</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @(Model.TotalLogins)%" aria-valuenow="@Model.TotalLogins" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="mt-4 mb-1" style="font-size: .77rem;">Total Reviews</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @(Model.TotalReviews)%" aria-valuenow="@Model.TotalReviews" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="mt-4 mb-1" style="font-size: .77rem;">Overall Accuracy</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @(Model.OverallAccuracy)%" aria-valuenow="@Model.OverallAccuracy" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4 mb-md-0">
+                        <div class="card-body">
+                            <h5 class="mb-4">Performance Metrics</h5>
+                            <p class="mb-1" style="font-size: .77rem;">XP: @Model.XP / @Model.NextLevelXP</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @(((double)Model.XP / Model.NextLevelXP) * 100)%" aria-valuenow="@Model.XP" aria-valuemin="0" aria-valuemax="@Model.NextLevelXP"></div>
+                            </div>
+                            <p class="mt-4 mb-1" style="font-size: .77rem;">Last Accuracy: @Model.LastAccuracy%</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @Model.LastAccuracy%" aria-valuenow="@Model.LastAccuracy" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="mt-4 mb-1" style="font-size: .77rem;">Correct Answers: @Model.TotalCorrect / @(Model.TotalCorrect + Model.TotalIncorrect)</p>
+                            <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: @(((double)Model.TotalCorrect / (Model.TotalCorrect + Model.TotalIncorrect)) * 100)%" aria-valuenow="@Model.TotalCorrect" aria-valuemin="0" aria-valuemax="@(Model.TotalCorrect + Model.TotalIncorrect)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <div class="container py-5">
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+    </div>
+}

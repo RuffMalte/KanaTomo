@@ -31,7 +31,6 @@
     <ItemGroup>
       <Folder Include="Migrations\" />
       <Folder Include="Web\" />
-      <Folder Include="Web\Controllers\User\" />
     </ItemGroup>
 
     <ItemGroup>

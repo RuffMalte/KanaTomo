@@ -16,29 +16,9 @@ public class HomeController : Controller
         _userService = userService;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        try
-        {
-            var currentUser = await _userService.GetCurrentUserAsync();
-            if (currentUser == null)
-            {
-                // Clear the invalid token
-                Response.Cookies.Delete("AuthToken");
-                return RedirectToAction("Login", "Auth");
-            }
-            return View(currentUser);
-        }
-        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-        {
-            // Redirect to login page if unauthorized
-            return RedirectToAction("Login", "Auth");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while fetching the current user");
-            return RedirectToAction("Error");
-        }
+        return View();
     }
 
     public IActionResult Privacy()

@@ -8,9 +8,11 @@ namespace KanaTomo.Web.Controllers.Auth;
 public class AuthController : Controller
 {
     private readonly IAuthService _authService;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, ILogger<AuthController> logger)
     {
+        _logger = logger;
         _authService = authService;
     }
 
@@ -38,10 +40,11 @@ public class AuthController : Controller
                     Expires = DateTime.UtcNow.AddDays(7)
                 });
                 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Me", "User");
             }
             catch (Exception ex)
             {
+                //TODO: add error if no account found
                 ModelState.AddModelError(string.Empty, "Login failed: " + ex.Message);
             }
         }
@@ -72,7 +75,7 @@ public class AuthController : Controller
                     Expires = DateTime.UtcNow.AddDays(7)
                 });
             
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Me", "User");
             }
             catch (Exception ex)
             {
