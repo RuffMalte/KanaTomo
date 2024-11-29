@@ -7,15 +7,19 @@ namespace KanaTomo.Web.Repositories.Translation;
 public class TranslationRepository : ITranslationRepository
 {
     private readonly HttpClient _httpClient;
+    private readonly IConfiguration _configuration;
 
     public TranslationRepository(IHttpClientFactory httpClientFactory, IConfiguration configuration)
     {
         _httpClient = httpClientFactory.CreateClient();
+        _configuration = configuration;
     }
 
     public async Task<TranslationModel> TranslateAsync(string text)
     {
-        var baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) ? "http://localhost:5070" : "http://host.docker.internal:5070";
+        var baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) 
+            ? _configuration.GetValue<string>("Connections:localhost") 
+            : _configuration.GetValue<string>("Connections:docker");
         
         var response = await _httpClient.GetAsync($"{baseUrl}/api/v1/apitranslate/translate?text={Uri.EscapeDataString(text)}");
         response.EnsureSuccessStatusCode();

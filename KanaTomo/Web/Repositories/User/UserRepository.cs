@@ -8,15 +8,17 @@ public class UserRepository : IUserRepository
 {
     private readonly HttpClient _httpClient;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly string _baseUrl;
+    private readonly string? _baseUrl;
+    private readonly IConfiguration _configuration;
 
-    public UserRepository(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
+    public UserRepository(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _httpContextAccessor = httpContextAccessor;
+        _configuration = configuration;
         _baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) 
-            ? "http://localhost:5070" 
-            : "http://host.docker.internal:5070";
+            ? _configuration.GetValue<string>("Connections:localhost") 
+            : _configuration.GetValue<string>("Connections:docker");
     }
 
     public async Task<UserModel?> GetCurrentUserAsync()

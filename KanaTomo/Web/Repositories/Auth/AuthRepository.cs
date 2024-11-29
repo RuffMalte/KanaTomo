@@ -7,14 +7,14 @@ namespace KanaTomo.Web.Controllers.Auth;
 public class AuthRepository : IAuthRepository
 {
     private readonly HttpClient _httpClient;
-    private readonly string _baseUrl;
+    private readonly string? _baseUrl;
 
     public AuthRepository(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _baseUrl = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")) 
-            ? "http://localhost:5070" 
-            : "http://host.docker.internal:5070";
+            ? configuration.GetValue<string>("Connections:localhost") 
+            : configuration.GetValue<string>("Connections:docker");
     }
 
     public async Task<string> LoginAsync(string username, string password)

@@ -11,7 +11,7 @@ ViewData["Title"] = "User Profile";
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-body text-center">
-                    @if (Model.ProfilePictureUrl == null)
+                    @if (Model.ProfilePictureUrl.IsNullOrEmpty())
                     {
                         <i class="bi bi-emoji-laughing-fill" style="font-size: 8rem;"></i>
                     }
