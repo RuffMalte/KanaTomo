@@ -116,6 +116,17 @@ public class AnkiRepository : IAnkiRepository
 
         return await response.Content.ReadFromJsonAsync<AnkiModel>() ?? throw new InvalidOperationException("Failed to review Anki item");
     }
+    
+    public async Task<bool> ResetAllCardsAsync()
+    {
+        var token = GetAuthTokenOrThrow();
+        SetAuthorizationHeader(token);
+
+        var response = await _httpClient.PostAsync($"{_baseUrl}/api/v1/apianki/reset", null);
+        await EnsureSuccessStatusCodeAsync(response);
+
+        return true;
+    }
 
     private string? GetAuthToken() => _httpContextAccessor.HttpContext?.Request.Cookies[AuthTokenCookieName];
 

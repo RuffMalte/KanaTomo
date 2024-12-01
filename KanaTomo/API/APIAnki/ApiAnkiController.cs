@@ -118,4 +118,23 @@ public class ApiAnkiController : ControllerBase
         }
         return Ok(updatedItem);
     }
+    
+    [Authorize]
+    [HttpPost("reset")]
+    public async Task<IActionResult> ResetAllCards()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var userGuid = Guid.Parse(userId);
+        var result = await _ankiService.ResetAllCardsForUserAsync(userGuid);
+        if (result)
+        {
+            return Ok(new { message = "All cards have been reset successfully." });
+        }
+        return BadRequest(new { message = "Failed to reset cards." });
+    }
 }

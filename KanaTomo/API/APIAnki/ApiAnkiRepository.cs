@@ -15,6 +15,8 @@ public interface IApiAnkiRepository
     Task<IEnumerable<AnkiModel>> GetDueAnkiItemsByUserIdAsync(Guid userId, DateTime currentDate);
     
     Task<AnkiModel> UpdateCardAfterReviewAsync(Guid id, int difficulty);
+    
+    Task<bool> ResetAllCardsForUserAsync(Guid userId);
 }
 
 public class ApiAnkiRepository : IApiAnkiRepository
@@ -135,5 +137,21 @@ public class ApiAnkiRepository : IApiAnkiRepository
         card.LastReviewDate = DateTime.UtcNow;
         card.NextReviewDate = card.LastReviewDate.AddDays(card.Interval);
         card.ReviewCount++;
+    }
+    
+    public async Task<bool> ResetAllCardsForUserAsync(Guid userId)
+    {
+        var userCards = await _context.AnkiItems.Where(a => a.UserId == userId).ToListAsync();
+        foreach (var card in userCards)
+        {
+            card.NextReviewDate = DateTime.UtcNow;
+            card.LastReviewDate = DateTime.UtcNow;
+            card.ReviewCount = 0;
+            card.Easiness = 2.5;
+            card.Interval = 0;
+            card.RepetitionNumber = 0;
+        }
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

@@ -46,4 +46,9 @@ public class AnkiService : IAnkiService
     {
         return await _ankiRepository.ReviewAnkiItemAsync(id, difficulty);
     }
+    
+    public async Task<bool> ResetAllCardsAsync()
+    {
+        return await _ankiRepository.ResetAllCardsAsync();
+    }
 }

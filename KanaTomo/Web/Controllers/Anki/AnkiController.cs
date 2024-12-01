@@ -182,4 +182,28 @@ public class AnkiController : Controller
             return RedirectToAction("Error", "Home");
         }
     }
+    
+    [HttpPost("reset")]
+    public async Task<IActionResult> ResetAllCards()
+    {
+        try
+        {
+            var result = await _ankiService.ResetAllCardsAsync();
+            if (result)
+            {
+                TempData["SuccessMessage"] = "All cards have been reset successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to reset cards.";
+            }
+            return RedirectToAction(nameof(GetUserCards));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while resetting all Anki cards");
+            TempData["ErrorMessage"] = "An error occurred while resetting cards.";
+            return RedirectToAction(nameof(GetUserCards));
+        }
+    }
 }

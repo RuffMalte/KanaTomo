@@ -48,5 +48,31 @@
     {
         <p>You don't have any Anki cards yet. Start by adding a new card!</p>
     }
-
+    
+    <div class="mt-4">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#resetConfirmModal">
+            <i class="bi bi-trash"></i>
+            Reset All Cards
+        </button>
+    </div>
+    <div class="modal fade" id="resetConfirmModal" tabindex="-1" aria-labelledby="resetConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetConfirmModalLabel">Confirm Reset</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to reset all your Anki cards? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form asp-action="ResetAllCards" method="post">
+                        <button type="submit" class="btn btn-danger">Reset All Cards</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
