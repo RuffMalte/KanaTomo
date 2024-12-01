@@ -140,4 +140,46 @@ public class AnkiController : Controller
             return RedirectToAction("Error", "Home");
         }
     }
+    
+    [HttpGet("review")]
+    public async Task<IActionResult> Review()
+    {
+        try
+        {
+            var dueAnkiItems = await _ankiService.GetDueAnkiItemsAsync();
+            if (!dueAnkiItems.Any())
+            {
+                return View("NoCardsToReview");
+            }
+            return View(dueAnkiItems.First());
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching due Anki cards");
+            return RedirectToAction("Error", "Home");
+        }
+    }
+
+    [HttpPost("review/{id}")]
+    public async Task<IActionResult> ReviewCard(Guid id, int difficulty)
+    {
+        try
+        {
+            await _ankiService.ReviewAnkiItemAsync(id, difficulty);
+            return RedirectToAction(nameof(Review));
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while reviewing Anki card with id {id}");
+            return RedirectToAction("Error", "Home");
+        }
+    }
 }

@@ -91,4 +91,31 @@ public class ApiAnkiController : ControllerBase
 
         return NoContent();
     }
+    
+    [Authorize]
+    [HttpGet("due")]
+    public async Task<ActionResult<IEnumerable<AnkiModel>>> GetDueAnkiItems()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var userGuid = Guid.Parse(userId);
+        var dueAnkiItems = await _ankiService.GetDueAnkiItemsByUserIdAsync(userGuid);
+        return Ok(dueAnkiItems);
+    }
+    
+    [Authorize]
+    [HttpPost("review/{id}")]
+    public async Task<ActionResult<AnkiModel>> ReviewAnkiItem(Guid id, [FromBody] int difficulty)
+    {
+        var updatedItem = await _ankiService.UpdateCardAfterReviewAsync(id, difficulty);
+        if (updatedItem == null)
+        {
+            return NotFound();
+        }
+        return Ok(updatedItem);
+    }
 }

@@ -1,0 +1,52 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model KanaTomo.Models.Anki.AnkiModel
+
+@{
+    ViewData["Title"] = "Review Anki Card";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Review Card</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Front</h3>
+                    <p class="card-text lead">@Model.Front</p>
+                    <hr>
+                    <div id="backContent" style="display: none;">
+                        <h3 class="card-title mb-4">Back</h3>
+                        <p class="card-text lead">@Model.Back</p>
+                    </div>
+                    <button id="showAnswerBtn" class="btn btn-secondary btn-lg btn-block mb-4">Show Answer</button>
+                    <div id="difficultyButtons" style="display: none;">
+                        <h4 class="mb-3">How difficult was this card?</h4>
+                        <form asp-action="ReviewCard" asp-route-id="@Model.Id" method="post">
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" name="difficulty" value="1" class="btn btn-danger btn-lg">Again</button>
+                                <button type="submit" name="difficulty" value="2" class="btn btn-warning btn-lg">Hard</button>
+                                <button type="submit" name="difficulty" value="3" class="btn btn-info btn-lg">Good</button>
+                                <button type="submit" name="difficulty" value="4" class="btn btn-success btn-lg">Easy</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    Last reviewed: @Model.LastReviewDate.ToString("g")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('showAnswerBtn').addEventListener('click', function() {
+            document.getElementById('backContent').style.display = 'block';
+            document.getElementById('difficultyButtons').style.display = 'block';
+            this.style.display = 'none';
+        });
+    </script>
+}

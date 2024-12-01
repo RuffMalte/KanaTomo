@@ -12,6 +12,9 @@ public interface IApiAnkiRepository
     Task<IEnumerable<AnkiModel>> GetAnkiItemsByUserIdAsync(Guid userId);
     Task<AnkiModel> UpdateAnkiItemAsync(AnkiModel ankiItem);
     Task<bool> DeleteAnkiItemAsync(Guid id);
+    Task<IEnumerable<AnkiModel>> GetDueAnkiItemsByUserIdAsync(Guid userId, DateTime currentDate);
+    
+    Task<AnkiModel> UpdateCardAfterReviewAsync(Guid id, int difficulty);
 }
 
 public class ApiAnkiRepository : IApiAnkiRepository
@@ -74,5 +77,63 @@ public class ApiAnkiRepository : IApiAnkiRepository
         _context.AnkiItems.Remove(ankiItem);
         await _context.SaveChangesAsync();
         return true;
+    }
+    
+    public async Task<IEnumerable<AnkiModel>> GetDueAnkiItemsByUserIdAsync(Guid userId, DateTime currentDate)
+    {
+        return await _context.AnkiItems
+            .Where(a => a.UserId == userId && a.NextReviewDate <= currentDate)
+            .ToListAsync();
+    }
+    
+    public async Task<AnkiModel> UpdateCardAfterReviewAsync(Guid id, int difficulty)
+    {
+        var card = await _context.AnkiItems.FindAsync(id);
+        if (card == null)
+        {
+            return null;
+        }
+
+        UpdateCardWithAnkiAlgorithm(card, difficulty);
+        await _context.SaveChangesAsync();
+        return card;
+    }
+
+    private void UpdateCardWithAnkiAlgorithm(AnkiModel card, int difficulty)
+    {
+        // Ensure difficulty is between 1 and 4
+        difficulty = Math.Clamp(difficulty, 1, 4);
+
+        // Calculate new easiness factor
+        card.Easiness = Math.Max(1.3, card.Easiness + 0.1 - (5 - difficulty) * (0.08 + (5 - difficulty) * 0.02));
+
+        // Update repetition number
+        if (difficulty < 3)
+        {
+            card.RepetitionNumber = 0;
+        }
+        else
+        {
+            card.RepetitionNumber++;
+        }
+
+        // Calculate new interval
+        if (card.RepetitionNumber == 0)
+        {
+            card.Interval = 1;
+        }
+        else if (card.RepetitionNumber == 1)
+        {
+            card.Interval = 6;
+        }
+        else
+        {
+            card.Interval = (int)Math.Round(card.Interval * card.Easiness);
+        }
+
+        // Update review dates
+        card.LastReviewDate = DateTime.UtcNow;
+        card.NextReviewDate = card.LastReviewDate.AddDays(card.Interval);
+        card.ReviewCount++;
     }
 }

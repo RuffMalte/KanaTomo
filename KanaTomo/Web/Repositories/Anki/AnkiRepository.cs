@@ -94,6 +94,28 @@ public class AnkiRepository : IAnkiRepository
         await EnsureSuccessStatusCodeAsync(response);
         return true;
     }
+    
+    public async Task<IEnumerable<AnkiModel>> GetDueAnkiItemsAsync()
+    {
+        var token = GetAuthTokenOrThrow();
+        SetAuthorizationHeader(token);
+
+        var response = await _httpClient.GetAsync($"{_baseUrl}/api/v1/apianki/due");
+        await EnsureSuccessStatusCodeAsync(response);
+
+        return await response.Content.ReadFromJsonAsync<IEnumerable<AnkiModel>>() ?? Enumerable.Empty<AnkiModel>();
+    }
+    
+    public async Task<AnkiModel> ReviewAnkiItemAsync(Guid id, int difficulty)
+    {
+        var token = GetAuthTokenOrThrow();
+        SetAuthorizationHeader(token);
+
+        var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/v1/apianki/review/{id}", difficulty);
+        await EnsureSuccessStatusCodeAsync(response);
+
+        return await response.Content.ReadFromJsonAsync<AnkiModel>() ?? throw new InvalidOperationException("Failed to review Anki item");
+    }
 
     private string? GetAuthToken() => _httpContextAccessor.HttpContext?.Request.Cookies[AuthTokenCookieName];
 

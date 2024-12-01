@@ -9,4 +9,6 @@ public interface IAnkiRepository
     Task<AnkiModel> AddCardToUserAsync(AnkiModel ankiItem);
     Task<AnkiModel?> UpdateAnkiItemAsync(AnkiModel ankiItem);
     Task<bool> DeleteAnkiItemAsync(Guid id);
+    Task<IEnumerable<AnkiModel>> GetDueAnkiItemsAsync();
+    Task<AnkiModel> ReviewAnkiItemAsync(Guid id, int difficulty);
 }

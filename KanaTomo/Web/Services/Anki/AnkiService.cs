@@ -36,4 +36,14 @@ public class AnkiService : IAnkiService
     {
         return await _ankiRepository.DeleteAnkiItemAsync(id);
     }
+    
+    public async Task<IEnumerable<AnkiModel>> GetDueAnkiItemsAsync()
+    {
+        return await _ankiRepository.GetDueAnkiItemsAsync();
+    }
+    
+    public async Task<AnkiModel> ReviewAnkiItemAsync(Guid id, int difficulty)
+    {
+        return await _ankiRepository.ReviewAnkiItemAsync(id, difficulty);
+    }
 }
