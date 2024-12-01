@@ -1,4 +1,91 @@
 ﻿@{
     ViewData["Title"] = "User Profile";
 }
-<p> hello</p>
+
+<header class="bg-primary text-white py-5 rounded">
+    <div class="container d-flex justify-content-between align-items-center pe-5 ps-5">
+        <div>
+            <h1 class="display-4">KanaTomo</h1>
+            <p class="lead">Your Japanese Learning Companion</p>
+            <a asp-controller="Translation" asp-action="Translate" class="btn btn-light btn-lg mt-3">Get Started</a>
+        </div>
+        <img src="images/translate.svg" alt="Favico" class="ms-3" style="height: 200px;">
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <img src="images/translate.svg" class="me-2" style="width: 30px; height: 30px"/>
+                            Instant Translation
+                        </h3>
+                        <p class="card-text">Translate between Japanese and English effortlessly, no login required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <img src="images/card-heading.svg" class="me-2" style="width: 30px; height: 30px"/>
+                            Anki Integration
+                        </h3>
+                        <p class="card-text">Add translated content directly to your personalized Anki deck for efficient learning.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <img src="images/book.svg" class="me-2" style="width: 30px; height: 30px"/>
+                            Smart Review
+                        </h3>
+                        <p class="card-text">Review your cards using the proven Anki spaced repetition system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light py-5 rounded">
+    <div class="container rounded">
+        <h2 class="text-center mb-4">How It Works</h2>
+        <div class="row">
+            <div class="col-md-4 text-center mb-3">
+                <div class="bg-white rounded-circle d-inline-flex p-3 shadow-sm">
+                    <img src="images/deepl-svgrepo-com.svg" class="img-fluid fs-2" style="height: 70px; width: 70px;"/>
+                </div>
+                <h4 class="mt-3">Translate</h4>
+                <p>Enter your text in Japanese or English</p>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <div class="bg-white rounded-circle d-inline-flex p-3 shadow-sm">
+                    <img src="images/icons8-anki.svg" class="img-fluid fs-2" style="height: 70px; width: 70px;"/>
+                </div>
+                <h4 class="mt-3">Add to Anki</h4>
+                <p>Save translations to your personal deck</p>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <div class="bg-white rounded-circle d-inline-flex p-3 shadow-sm">
+                    <img src="images/journal-album.svg" class="img-fluid fs-2" style="height: 70px; width: 70px;"/>
+                </div>
+                <h4 class="mt-3">Review</h4>
+                <p>Study and reinforce your learning</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to Enhance Your Language Learning?</h2>
+        <a asp-controller="Auth" asp-action="Register" class="btn btn-primary btn-lg me-3">Sign Up</a>
+        <a asp-controller="Translation" asp-action="Translate" class="btn btn-outline-primary btn-lg">Try Translation</a>
+    </div>
+</section>

@@ -83,6 +83,11 @@ public class AnkiController : Controller
             var createdAnkiItem = await _ankiService.AddCardToUserAsync(ankiItem);
             return RedirectToAction("GetUserCards");
         }
+        catch (UnauthorizedAccessException)
+        {
+            _logger.LogWarning("Unauthorized access attempt: No authentication token found");
+            return RedirectToAction("Login", "Auth");
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "An error occurred while adding a new Anki card");
