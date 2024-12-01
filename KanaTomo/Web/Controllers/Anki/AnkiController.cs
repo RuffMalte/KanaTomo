@@ -24,18 +24,23 @@ public class AnkiController : Controller
         {
             var allCards = await _ankiService.GetUserAnkiItemsAsync();
             var dueCards = await _ankiService.GetDueAnkiItemsAsync();
-            
+        
             var viewModel = new AnkiCardListViewModel 
             { 
                 Cards = allCards.ToList(),
                 DueCardsCount = dueCards.Count(),
                 TotalCardsCount = allCards.Count()
             };
-            
+        
             return View(viewModel);
         }
         catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
         {
+            return RedirectToAction("Login", "Auth");
+        }
+        catch (UnauthorizedAccessException)
+        {
+            _logger.LogWarning("Unauthorized access attempt: No authentication token found");
             return RedirectToAction("Login", "Auth");
         }
         catch (Exception ex)

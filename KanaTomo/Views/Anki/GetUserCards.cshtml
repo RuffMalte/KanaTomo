@@ -14,8 +14,10 @@
         </a>
     </div>
 
-
-    @await Html.PartialAsync("_StudyButton", (Model.DueCardsCount, Model.TotalCardsCount))
+    @if (Model.DueCardsCount > 0)
+    {
+        @await Html.PartialAsync("_StudyButton", (Model.DueCardsCount, Model.TotalCardsCount))        
+    }
     
     @if (Model.Cards.Any())
     {
