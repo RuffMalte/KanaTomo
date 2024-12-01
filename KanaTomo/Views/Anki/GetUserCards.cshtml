@@ -13,8 +13,10 @@
             Add to Anki
         </a>
     </div>
-    
 
+
+    @await Html.PartialAsync("_StudyButton", (Model.DueCardsCount, Model.TotalCardsCount))
+    
     @if (Model.Cards.Any())
     {
         <div class="row row-cols-1 row-cols-md-3 g-4">

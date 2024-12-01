@@ -22,8 +22,16 @@ public class AnkiController : Controller
     {
         try
         {
-            var ankiItems = await _ankiService.GetUserAnkiItemsAsync();
-            var viewModel = new AnkiCardListViewModel { Cards = ankiItems.ToList() };
+            var allCards = await _ankiService.GetUserAnkiItemsAsync();
+            var dueCards = await _ankiService.GetDueAnkiItemsAsync();
+            
+            var viewModel = new AnkiCardListViewModel 
+            { 
+                Cards = allCards.ToList(),
+                DueCardsCount = dueCards.Count(),
+                TotalCardsCount = allCards.Count()
+            };
+            
             return View(viewModel);
         }
         catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
