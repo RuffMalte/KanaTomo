@@ -1,81 +1,39 @@
-using System.Security.Claims;
+using System.Text.Json;
 using KanaTomo.Models.Anki;
-using KanaTomo.ViewModels;
+using KanaTomo.ViewModels.Anki;
 using KanaTomo.Web.Services.Anki;
-using KanaTomo.Web.Services.User;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KanaTomo.Web.Controllers.Anki;
-
-using KanaTomo.Models.User;
-using Microsoft.AspNetCore.Mvc;
 
 public class AnkiController : Controller
 {
     private readonly ILogger<AnkiController> _logger;
     private readonly IAnkiService _ankiService;
-    private readonly IUserService _userService;
 
-    public AnkiController(IAnkiService ankiService, ILogger<AnkiController> logger, IUserService userService)
+    public AnkiController(IAnkiService ankiService, ILogger<AnkiController> logger)
     {
         _logger = logger;
         _ankiService = ankiService;
-        _userService = userService;
     }
-
-    [HttpPost]
-    public async Task<IActionResult> Add(AddAnkiItemViewModel model)
-    {
-        _logger.LogError("Adding an Anki card with front: {Front}, back: {Back}", model.Front, model.Back);
-        try
-        {
-            var currentUser = await _userService.GetCurrentUserAsync();
-            if (currentUser == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-
-            var ankiItem = new AnkiModel()
-            {
-                Front = model.Front,
-                Back = model.Back,
-                UserId = currentUser.Id,
-            };
-
-            var addedCard = await _ankiService.AddCardToUserAsync(ankiItem);
-            TempData["SuccessMessage"] = "Anki card added successfully!";
-            _logger.LogInformation("An Anki card with id {Id} was added successfully", addedCard.Id);
-            return RedirectToAction("Translate", "Translation");
-        }
-        catch (UnauthorizedAccessException)
-        {
-            return RedirectToAction("Login", "Auth");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while adding an Anki card");
-            ModelState.AddModelError("", "An error occurred while adding the card. Please try again.");
-            return RedirectToAction("Translate", "Translation");
-        }
-    }
-
-
 
     [HttpGet("cards")]
     public async Task<IActionResult> GetUserCards()
     {
         try
         {
-            var cards = await _ankiService.GetUserCardsAsync();
-            return Ok(cards);
+            var ankiItems = await _ankiService.GetUserAnkiItemsAsync();
+            var viewModel = new AnkiCardListViewModel { Cards = ankiItems.ToList() };
+            return View(viewModel);
         }
-        catch (UnauthorizedAccessException)
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
         {
             return RedirectToAction("Login", "Auth");
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "An error occurred while fetching user's Anki cards");
-            return StatusCode(500, "An error occurred while fetching the cards");
+            return RedirectToAction("Error", "Home");
         }
     }
 
@@ -84,21 +42,102 @@ public class AnkiController : Controller
     {
         try
         {
-            var card = await _ankiService.GetCardByIdAsync(id);
-            if (card == null)
+            var ankiItem = await _ankiService.GetAnkiItemByIdAsync(id);
+            if (ankiItem == null)
             {
                 return NotFound();
             }
-            return Ok(card);
-        }
-        catch (UnauthorizedAccessException)
-        {
-            return RedirectToAction("Login", "Auth");
+            return View(ankiItem);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while fetching an Anki card");
-            return StatusCode(500, "An error occurred while fetching the card");
+            _logger.LogError(ex, $"An error occurred while fetching Anki card with id {id}");
+            return RedirectToAction("Error", "Home");
+        }
+    }
+
+    [HttpGet("card/add")]
+    public IActionResult AddCard()
+    {
+        return View(new AnkiModel());
+    }
+
+    [HttpPost("card/add")]
+    public async Task<IActionResult> AddCard(AnkiModel ankiItem)
+    {
+        try
+        {
+            var createdAnkiItem = await _ankiService.AddCardToUserAsync(ankiItem);
+            return RedirectToAction("GetUserCards");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while adding a new Anki card");
+            ModelState.AddModelError(string.Empty, "Failed to add card: " + ex.Message);
+            return View(ankiItem);
+        }
+    }
+
+    [HttpGet("card/edit/{id}")]
+    public async Task<IActionResult> EditCard(Guid id)
+    {
+        try
+        {
+            var ankiItem = await _ankiService.GetAnkiItemByIdAsync(id);
+            if (ankiItem == null)
+            {
+                return NotFound();
+            }
+            return View(ankiItem);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while fetching Anki card with id {id} for editing");
+            return RedirectToAction("Error", "Home");
+        }
+    }
+
+    [HttpPost("card/edit/{id}")]
+    public async Task<IActionResult> EditCard(Guid id, AnkiModel ankiItem)
+    {
+        if (id != ankiItem.Id)
+        {
+            return BadRequest();
+        }
+
+        try
+        {
+            var updatedItem = await _ankiService.UpdateAnkiItemAsync(ankiItem);
+            if (updatedItem == null)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("GetUserCards");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while updating Anki card with id {id}");
+            ModelState.AddModelError(string.Empty, "Update failed: " + ex.Message);
+            return View(ankiItem);
+        }
+    }
+
+    [HttpPost("card/delete/{id}")]
+    public async Task<IActionResult> DeleteCard(Guid id)
+    {
+        try
+        {
+            var result = await _ankiService.DeleteAnkiItemAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return RedirectToAction(nameof(GetUserCards));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while deleting Anki card with id {id}");
+            return RedirectToAction("Error", "Home");
         }
     }
 }

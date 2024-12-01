@@ -1,0 +1,50 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model KanaTomo.Models.Anki.AnkiModel
+
+@{
+    ViewData["Title"] = "Edit Anki Card";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Anki Card</h1>
+
+    <form asp-action="EditCard" asp-controller="Anki" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="UserId" />
+
+
+        <div class="mb-3">
+            <label asp-for="Front" class="form-label">Front</label>
+            <textarea asp-for="Front" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="Front" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Back" class="form-label">Back</label>
+            <textarea asp-for="Back" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="Back" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CreatedAt" class="form-label">Created At</label>
+            <input asp-for="CreatedAt" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LastReviewDate" class="form-label">Last Review Date</label>
+            <input asp-for="LastReviewDate" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ReviewCount" class="form-label">Review Count</label>
+            <input asp-for="ReviewCount" class="form-control" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="GetUserCards" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

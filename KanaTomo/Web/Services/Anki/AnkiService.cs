@@ -12,18 +12,28 @@ public class AnkiService : IAnkiService
         _ankiRepository = ankiRepository;
     }
 
+    public async Task<IEnumerable<AnkiModel>> GetUserAnkiItemsAsync()
+    {
+        return await _ankiRepository.GetUserAnkiItemsAsync();
+    }
+
+    public async Task<AnkiModel?> GetAnkiItemByIdAsync(Guid id)
+    {
+        return await _ankiRepository.GetAnkiItemByIdAsync(id);
+    }
+
     public async Task<AnkiModel> AddCardToUserAsync(AnkiModel ankiItem)
     {
         return await _ankiRepository.AddCardToUserAsync(ankiItem);
     }
 
-    public async Task<IEnumerable<AnkiModel>> GetUserCardsAsync()
+    public async Task<AnkiModel?> UpdateAnkiItemAsync(AnkiModel ankiItem)
     {
-        return await _ankiRepository.GetUserCardsAsync();
+        return await _ankiRepository.UpdateAnkiItemAsync(ankiItem);
     }
 
-    public async Task<AnkiModel?> GetCardByIdAsync(Guid id)
+    public async Task<bool> DeleteAnkiItemAsync(Guid id)
     {
-        return await _ankiRepository.GetCardByIdAsync(id);
+        return await _ankiRepository.DeleteAnkiItemAsync(id);
     }
 }

@@ -69,7 +69,7 @@ public class ApiAnkiController : ControllerBase
         {
             return BadRequest();
         }
-
+        
         var updatedItem = await _ankiService.UpdateAnkiItemAsync(ankiItem);
         if (updatedItem == null)
         {

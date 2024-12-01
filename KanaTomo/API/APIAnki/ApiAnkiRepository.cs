@@ -40,11 +40,27 @@ public class ApiAnkiRepository : IApiAnkiRepository
         return await _context.AnkiItems.Where(a => a.UserId == userId).ToListAsync();
     }
 
-    public async Task<AnkiModel> UpdateAnkiItemAsync(AnkiModel ankiItem)
+    public async Task<AnkiModel?> UpdateAnkiItemAsync(AnkiModel ankiItem)
     {
-        _context.Entry(ankiItem).State = EntityState.Modified;
+        var userExists = await _context.Users.AnyAsync(u => u.Id == ankiItem.UserId);
+        if (!userExists)
+        {
+            return null; // Or throw a custom exception
+        }
+        
+        var existingItem = await _context.AnkiItems.FindAsync(ankiItem.Id);
+        if (existingItem == null)
+        {
+            return null;
+        }
+        
+        existingItem.Front = ankiItem.Front;
+        existingItem.Back = ankiItem.Back;
+        existingItem.ReviewCount = ankiItem.ReviewCount;
+        existingItem.CreatedAt = ankiItem.CreatedAt;
+
         await _context.SaveChangesAsync();
-        return ankiItem;
+        return existingItem;
     }
 
     public async Task<bool> DeleteAnkiItemAsync(Guid id)

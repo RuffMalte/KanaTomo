@@ -1,0 +1,52 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model KanaTomo.ViewModels.Anki.AnkiCardListViewModel
+
+@{
+    ViewData["Title"] = "Your Anki Cards";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-center align-items-center justify-content-between mb-4">
+        <h1 class="mb-0 me-3">Your Anki Cards</h1>
+        <a href="@Url.Action("AddCard", "Anki")" class="btn btn-success">
+            <i class="bi bi-plus"></i>
+            Add to Anki
+        </a>
+    </div>
+    
+
+    @if (Model.Cards.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var card in Model.Cards)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@card.Front</h5>
+                            <p class="card-text">@card.Back</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Created: @card.CreatedAt.ToShortDateString()</small>
+                            <br>
+                            <small class="text-muted">Last Review: @card.LastReviewDate.ToShortDateString()</small>
+                            <br>
+                            <small class="text-muted">Review Count: @card.ReviewCount</small>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("EditCard", "Anki", new { id = card.Id })" class="btn btn-primary btn-sm">Edit</a>
+                            <form asp-action="DeleteCard" asp-route-id="@card.Id" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this card?');">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>You don't have any Anki cards yet. Start by adding a new card!</p>
+    }
+
+</div>
