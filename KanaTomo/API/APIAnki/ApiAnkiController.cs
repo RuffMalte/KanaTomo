@@ -46,5 +46,49 @@ public class ApiAnkiController : ControllerBase
         return Ok(ankiItem);
     }
 
-    // Add other CRUD operations as needed
+    [Authorize]
+    [HttpGet("user")]
+    public async Task<ActionResult<IEnumerable<AnkiModel>>> GetUserAnkiItems()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var userGuid = Guid.Parse(userId);
+        var ankiItems = await _ankiService.GetAnkiItemsByUserIdAsync(userGuid);
+        return Ok(ankiItems);
+    }
+
+    [Authorize]
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAnkiItem(Guid id, [FromBody] AnkiModel ankiItem)
+    {
+        if (id != ankiItem.Id)
+        {
+            return BadRequest();
+        }
+
+        var updatedItem = await _ankiService.UpdateAnkiItemAsync(ankiItem);
+        if (updatedItem == null)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAnkiItem(Guid id)
+    {
+        var result = await _ankiService.DeleteAnkiItemAsync(id);
+        if (!result)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
 }

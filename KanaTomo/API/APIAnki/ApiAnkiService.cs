@@ -6,7 +6,9 @@ public interface IApiAnkiService
 {
     Task<AnkiModel> AddCardToUserAsync(Guid userId, AnkiModel ankiItem);
     Task<AnkiModel> GetAnkiItemByIdAsync(Guid id);
-    // Add other methods as needed
+    Task<IEnumerable<AnkiModel>> GetAnkiItemsByUserIdAsync(Guid userId);
+    Task<AnkiModel> UpdateAnkiItemAsync(AnkiModel ankiItem);
+    Task<bool> DeleteAnkiItemAsync(Guid id);
 }
 
 public class ApiAnkiService : IApiAnkiService
@@ -29,5 +31,18 @@ public class ApiAnkiService : IApiAnkiService
         return await _ankiRepository.GetAnkiItemByIdAsync(id);
     }
 
-    // Implement other methods as needed
+    public async Task<IEnumerable<AnkiModel>> GetAnkiItemsByUserIdAsync(Guid userId)
+    {
+        return await _ankiRepository.GetAnkiItemsByUserIdAsync(userId);
+    }
+
+    public async Task<AnkiModel> UpdateAnkiItemAsync(AnkiModel ankiItem)
+    {
+        return await _ankiRepository.UpdateAnkiItemAsync(ankiItem);
+    }
+
+    public async Task<bool> DeleteAnkiItemAsync(Guid id)
+    {
+        return await _ankiRepository.DeleteAnkiItemAsync(id);
+    }
 }
