@@ -1,4 +1,6 @@
+@using KanaTomo.Models.Anki
 @using KanaTomo.Models.Translation
+@using KanaTomo.ViewModels
 @model KanaTomo.ViewModels.TranslationViewModel
 @{
 ViewData["Title"] = "Translate";
@@ -50,11 +52,14 @@ ViewData["Title"] = "Translate";
                 }
             </div>
             <div class="col-md-4">
-                <!-- Right column (1/3 width) -->
                 @if (Model.TranslationResult.DeeplResponse != null)
                 {
                     <partial name="Items/DeeplDataItem" model="Model.TranslationResult.DeeplResponse"/>
                 }
+                <partial name="Anki/AddAnkiCardButton" model="new AddAnkiItemViewModel() {
+                                Front = Model.TextToTranslate,  
+                                Back = Model.TranslationResult.DeeplResponse.Text
+                            }"/>
             </div>
         </div>
     }

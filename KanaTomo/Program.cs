@@ -1,4 +1,5 @@
 using System.Text;
+using KanaTomo.API.APIAnki;
 using KanaTomo.API.APIAuth;
 using KanaTomo.API.APITranslation;
 using KanaTomo.API.APIUser;
@@ -6,9 +7,11 @@ using KanaTomo.Helper;
 using KanaTomo.Models.User;
 using KanaTomo.Web.Controllers.Auth;
 using KanaTomo.Web.Repositories;
+using KanaTomo.Web.Repositories.Anki;
 using KanaTomo.Web.Repositories.Auth;
 using KanaTomo.Web.Repositories.Translation;
 using KanaTomo.Web.Repositories.User;
+using KanaTomo.Web.Services.Anki;
 using KanaTomo.Web.Services.Translation;
 using KanaTomo.Web.Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -79,6 +82,13 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IApiAnkiService, ApiAnkiService>();
+builder.Services.AddScoped<IApiAnkiRepository, ApiAnkiRepository>();
+
+builder.Services.AddScoped<IAnkiService, AnkiService>();
+builder.Services.AddScoped<IAnkiRepository, AnkiRepository>();
+
 
 // Add configuration
 if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")))

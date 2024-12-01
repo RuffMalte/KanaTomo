@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using KanaTomo.Models.Anki;
 
 namespace KanaTomo.Models.User;
 
@@ -28,4 +29,8 @@ public class UserModel
     public int TotalReviews { get; set; } = 0;
     public int TotalCorrect { get; set; } = 0;
     public int TotalIncorrect { get; set; } = 0;
+    
+    //ANKI
+    public List<AnkiModel> AnkiItems { get; set; } = new List<AnkiModel>();
+
 }
