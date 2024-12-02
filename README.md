@@ -20,13 +20,34 @@ KanaTomo is a web application designed to help learners of the Japanese language
 Running instructions.
 
 ### Run locally
-To Run locally and have the DeepL translation feature work, you need to provide an API key.
-You can add a API key by creating a .env file and adding the following line:
+To Run locally you will need to create a `.env` file and add the following lines:
 ```env
+# This is optional, but if you want to use DeepL you need to provide an API key. 
+# However it is recommended to use DeepL aswell.
 deeplApiKey=yourApiKeyHere
+
+
+# Connection string to your MySQL database
 DefaultConnection=Server=localhost;Port=3306;Database=mysql-container;User=root;Password=1234;
+
+
+# Secret key for JWT
 jwtSecret=YourVeryLongAndSecureSecretKeyHere1234567892
+
+
+# Email configuration, you can use Gmail for this. 
+# This will send Emails to users when they register. 
+# But also not required.
+EMAIL_FROM=your-email@example.com
+EMAIL_SMTP_SERVER=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USERNAME=your-email@gmail.com
+EMAIL_PASSWORD=your-app-specific-password
 ```
+
+Without the `.env` file the application will not work.
+
+
 
 ### Run in Docker container
 
@@ -34,8 +55,27 @@ In order to have the application work with DeepL, you need to provide an API key
 You can do this by adding the following line to the `docker-compose.yml` file: 
 ```yml
 environment:
+    # This is optional, but if you want to use DeepL you need to provide an API key. 
+    # However it is recommended to use DeepL aswell.
     - deeplApiKey=yourApiKeyHere
-    - DefaultConnection=Server=host.docker.internal;Port=3306;Database=mysql-container;User=root;Password=1234;
-    - jwtSecret=YourVeryLongAndSecureSecretKeyHere1234567892
-```
 
+    # Connection string to your MySQL database
+    - DefaultConnection=Server=localhost;Port=3306;Database=mysql-container;User=root;Password=1234;
+
+    # Secret key for JWT
+    - jwtSecret=YourVeryLongAndSecureSecretKeyHere1234567892
+
+    # Email configuration, you can use Gmail for this. 
+    # This will send Emails to users when they register. 
+    # But also not required.
+    - EMAIL_FROM=your-email@example.com
+    - EMAIL_SMTP_SERVER=smtp.gmail.com
+    - EMAIL_PORT=587
+    - EMAIL_USERNAME=your-email@gmail.com
+    - EMAIL_PASSWORD=your-app-specific-password
+```
+Afterwards you can run the following command in the root directory of the project:
+```bash
+docker-compose build
+docker-compose up
+```
