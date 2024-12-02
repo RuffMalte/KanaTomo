@@ -58,7 +58,7 @@ ViewData["Title"] = "Translate";
                 }
                 <partial name="Anki/AddAnkiCardButton" model="new AddAnkiItemViewModel() {
                                 Front = Model.TextToTranslate,  
-                                Back = Model.TranslationResult.DeeplResponse.Text
+                                Back = Model.TranslationResult.JishoResponse.Data.First().Slug
                             }"/>
             </div>
         </div>
