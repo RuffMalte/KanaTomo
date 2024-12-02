@@ -2,9 +2,11 @@ using System.Text;
 using System.Text.Json.Serialization;
 using KanaTomo.API.APIAnki;
 using KanaTomo.API.APIAuth;
+using KanaTomo.API.APIEmailService;
 using KanaTomo.API.APITranslation;
 using KanaTomo.API.APIUser;
 using KanaTomo.Helper;
+using KanaTomo.Models.Email;
 using KanaTomo.Models.User;
 using KanaTomo.Web.Controllers.Auth;
 using KanaTomo.Web.Repositories;
@@ -85,6 +87,16 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// Register EmailConfiguration
+builder.Services.Configure<EmailConfiguration>(config =>
+{
+    config.From = Environment.GetEnvironmentVariable("EMAIL_FROM");
+    config.SmtpServer = Environment.GetEnvironmentVariable("EMAIL_SMTP_SERVER");
+    config.Port = int.Parse(Environment.GetEnvironmentVariable("EMAIL_PORT") ?? "587");
+    config.Username = Environment.GetEnvironmentVariable("EMAIL_USERNAME");
+    config.Password = Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
+});
+
 // Register HttpClient
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
@@ -115,6 +127,8 @@ builder.Services.AddScoped<IApiAnkiRepository, ApiAnkiRepository>();
 builder.Services.AddScoped<IAnkiService, AnkiService>();
 builder.Services.AddScoped<IAnkiRepository, AnkiRepository>();
 
+builder.Services.AddScoped<IApiEmailRepository, ApiEmailRepository>();
+builder.Services.AddScoped<IApiEmailService, ApiEmailService>();
 
 // Add configuration
 if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")))

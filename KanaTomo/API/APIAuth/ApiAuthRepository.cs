@@ -1,3 +1,4 @@
+using KanaTomo.API.APIEmailService;
 using KanaTomo.Models.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,12 @@ public interface IApiAuthRepository
 public class ApiAuthRepository : IApiAuthRepository
 {
     private readonly UserContext _context;
+    private readonly IApiEmailService _emailService;
 
-    public ApiAuthRepository(UserContext context)
+    public ApiAuthRepository(UserContext context, IApiEmailService emailService)
     {
         _context = context;
+        _emailService = emailService;
     }
 
     public async Task<UserModel> GetUserByUsernameAsync(string username)
@@ -28,6 +31,9 @@ public class ApiAuthRepository : IApiAuthRepository
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
+        
+        await _emailService.SendEmailAsync(email, "Welcome to KanaTomo", "Welcome to KanaTomo! We're excited to have you on board.");
+        
         return user;
     }
 }
