@@ -83,17 +83,13 @@ ViewData["Title"] = "User Profile";
                         <div class="card-body">
                             <h5 class="mb-4">Activity Statistics</h5>
                             <p class="mb-1" style="font-size: .77rem;">Total Logins</p>
-                            <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: @(Model.TotalLogins)%" aria-valuenow="@Model.TotalLogins" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <p><strong>@Model.TotalLogins</strong></p>
+
                             <p class="mt-4 mb-1" style="font-size: .77rem;">Total Reviews</p>
-                            <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: @(Model.TotalReviews)%" aria-valuenow="@Model.TotalReviews" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <p><strong>@Model.TotalReviews</strong></p>
+
                             <p class="mt-4 mb-1" style="font-size: .77rem;">Overall Accuracy</p>
-                            <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: @(Model.OverallAccuracy)%" aria-valuenow="@Model.OverallAccuracy" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <p><strong>@Model.OverallAccuracy%</strong></p>
                         </div>
                     </div>
                 </div>

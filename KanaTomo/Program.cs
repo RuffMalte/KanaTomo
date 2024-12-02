@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using KanaTomo.API.APIAnki;
 using KanaTomo.API.APIAuth;
 using KanaTomo.API.APITranslation;
@@ -51,6 +52,9 @@ builder.Services.AddVersionedApiExplorer(options =>
     options.GroupNameFormat = "'v'VVV";
     options.SubstituteApiVersionInUrl = true;
 });
+
+builder.Services.AddControllers().AddJsonOptions(x => 
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();

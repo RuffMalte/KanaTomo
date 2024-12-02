@@ -9,6 +9,7 @@ public interface IApiUserService
     Task<UserModel> CreateUserAsync(UserModel user);
     Task<UserModel> UpdateUserAsync(UserModel user);
     Task DeleteUserAsync(Guid id);
+    Task<UserModel> UpdateUserStatisticsAsync(Guid userId, bool isCorrect);
 }
 
 public class ApiUserService : IApiUserService
@@ -57,5 +58,42 @@ public class ApiUserService : IApiUserService
     public async Task DeleteUserAsync(Guid id)
     {
         await _userRepository.DeleteUserAsync(id);
+    }
+    
+    public async Task<UserModel> UpdateUserStatisticsAsync(Guid userId, bool isCorrect)
+    {
+        var user = await _userRepository.GetUserByIdAsync(userId);
+        if (user == null)
+        {
+            throw new KeyNotFoundException("User not found");
+        }
+
+        user.TotalReviews++;
+        user.LastActivityDate = DateTime.UtcNow;
+        user.LastLoginDate = DateTime.UtcNow;
+        user.TotalLogins += 1;
+
+        if (isCorrect)
+        {
+            user.TotalCorrect++;
+            user.LastAccuracy = 1.0f;
+        }
+        else
+        {
+            user.TotalIncorrect++;
+            user.LastAccuracy = 0.0f;
+        }
+
+        user.OverallAccuracy = (float)user.TotalCorrect / user.TotalReviews;
+
+        user.XP += 2; // Add 10 XP for each review
+        if (user.XP >= user.NextLevelXP)
+        {
+            user.Level++;
+            user.NextLevelXP *= 2; // Double the XP needed for next level
+        }
+
+        await _userRepository.UpdateUserAsync(user);
+        return user;
     }
 }

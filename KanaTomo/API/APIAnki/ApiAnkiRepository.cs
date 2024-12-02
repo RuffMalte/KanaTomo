@@ -1,3 +1,4 @@
+using KanaTomo.API.APIUser;
 using KanaTomo.Models.Anki;
 using KanaTomo.Models.User;
 
@@ -22,10 +23,12 @@ public interface IApiAnkiRepository
 public class ApiAnkiRepository : IApiAnkiRepository
 {
     private readonly UserContext _context;
+    private readonly IApiUserService _userService;
 
-    public ApiAnkiRepository(UserContext context)
+    public ApiAnkiRepository(UserContext context, IApiUserService userService)
     {
         _context = context;
+        _userService = userService;
     }
 
     public async Task<AnkiModel> CreateAnkiItemAsync(AnkiModel ankiItem)
@@ -96,12 +99,12 @@ public class ApiAnkiRepository : IApiAnkiRepository
             return null;
         }
 
-        UpdateCardWithAnkiAlgorithm(card, difficulty);
+        await UpdateCardWithAnkiAlgorithm(card, difficulty);
         await _context.SaveChangesAsync();
         return card;
     }
 
-    private void UpdateCardWithAnkiAlgorithm(AnkiModel card, int difficulty)
+    private async Task UpdateCardWithAnkiAlgorithm(AnkiModel card, int difficulty)
     {
         // Ensure difficulty is between 1 and 4
         difficulty = Math.Clamp(difficulty, 1, 4);
@@ -137,6 +140,9 @@ public class ApiAnkiRepository : IApiAnkiRepository
         card.LastReviewDate = DateTime.UtcNow;
         card.NextReviewDate = card.LastReviewDate.AddDays(card.Interval);
         card.ReviewCount++;
+        
+        bool isCorrect = difficulty >= 3;
+        await _userService.UpdateUserStatisticsAsync(card.UserId, isCorrect);
     }
     
     public async Task<bool> ResetAllCardsForUserAsync(Guid userId)
