@@ -44,9 +44,12 @@ EMAIL_PORT=587
 EMAIL_USERNAME=your-email@gmail.com
 EMAIL_PASSWORD=your-app-specific-password
 ```
-
 Without the `.env` file the application will not work.
 
+You will also need to have a MySQL database running. You can do this by running the following command:
+```bash
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=1234 -p 3306:3306 -d mysql:latest
+```
 
 
 ### Run in Docker container
