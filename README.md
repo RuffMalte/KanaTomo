@@ -75,8 +75,16 @@ environment:
     - EMAIL_PASSWORD=your-app-specific-password
 ```
 Afterwards you can run the following command in the root directory of the project:
-You might have to wait for the MySQL Database to finish the migration, which can take up to 20 seconds. 
 ```bash
 docker-compose build
+```
+```bash
 docker-compose up
 ```
+You might have to wait for the MySQL Database to finish the migration.
+This can take up to 20 seconds. 
+
+
+## Explore
+You can reach the application by going to http://localhost:5070 in your browser by default.
+
