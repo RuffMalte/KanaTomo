@@ -11,13 +11,13 @@ ViewData["Title"] = "User Profile";
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-body text-center">
-                    @if (Model.ProfilePictureUrl.IsNullOrEmpty())
+                    @if (string.IsNullOrEmpty(Model.ProfilePictureUrl))
                     {
                         <i class="bi bi-emoji-laughing-fill" style="font-size: 8rem;"></i>
                     }
                     else
                     {
-                        <img src="@Model.ProfilePictureUrl" alt="avatar" class="rounded-circle img-fluid" style="font-size: 8rem;">
+                        <i class="bi @Model.ProfilePictureUrl" style="font-size: 8rem;"></i>
                     }
                     <h5 class="my-3">@Model.Username</h5>
                     <p class="text-muted mb-1">Level @Model.Level</p>

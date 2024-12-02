@@ -25,10 +25,19 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="ProfilePictureUrl" class="form-label"></label>
-            <input asp-for="ProfilePictureUrl" class="form-control" />
-            <span class="text-danger"></span>
+            <label asp-for="ProfilePictureUrl" class="form-label">Profile Picture</label>
+            <div class="input-group">
+                <div class="form-control d-flex align-items-center" id="selectedIconDisplay">
+                    <i id="selectedIcon" class="bi"></i>
+                </div>
+                <input asp-for="ProfilePictureUrl" type="hidden" />
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#iconModal">
+                    <i class="bi bi-emoji-smile"></i> Choose Icon
+                </button>
+            </div>
+            <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
         </div>
+        
         <button type="submit" class="btn btn-primary">Save Changes</button>
         <a href="@Url.Action("Me", "User")" class="btn btn-secondary">Cancel</a>
     </form>
@@ -41,3 +50,66 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<div class="modal fade" id="iconModal" tabindex="-1" aria-labelledby="iconModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="iconModalLabel">Choose Profile Icon</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row row-cols-3 row-cols-md-6 g-4" id="iconGrid">
+                    <!-- Icons will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const icons = [
+            'emoji-smile', 'emoji-laughing', 'emoji-heart-eyes', 'emoji-sunglasses',
+            'emoji-wink', 'emoji-neutral', 'emoji-frown', 'emoji-dizzy',
+            'person', 'person-circle', 'star', 'star-fill',
+            'heart', 'heart-fill', 'music-note', 'camera'
+        ];
+
+        const iconGrid = document.getElementById('iconGrid');
+        const profilePictureInput = document.getElementById('ProfilePictureUrl');
+        const selectedIcon = document.getElementById('selectedIcon');
+        const selectedIconDisplay = document.getElementById('selectedIconDisplay');
+
+        icons.forEach(icon => {
+            const col = document.createElement('div');
+            col.className = 'col text-center';
+            col.innerHTML = `
+                <div class="icon-option p-3 border rounded" data-icon="${icon}">
+                    <i class="bi bi-${icon} fs-1"></i>
+                </div>
+            `;
+            iconGrid.appendChild(col);
+        });
+
+        iconGrid.addEventListener('click', function(e) {
+            const iconOption = e.target.closest('.icon-option');
+            if (iconOption) {
+                const selectedIconClass = `bi-${iconOption.dataset.icon}`;
+                profilePictureInput.value = selectedIconClass;
+                selectedIcon.className = `bi ${selectedIconClass} fs-4`;
+                selectedIconDisplay.classList.remove('text-muted');
+                bootstrap.Modal.getInstance(document.getElementById('iconModal')).hide();
+            }
+        });
+
+        // Initialize with existing value if any
+        if (profilePictureInput.value) {
+            selectedIcon.className = `bi ${profilePictureInput.value} fs-4`;
+            selectedIconDisplay.classList.remove('text-muted');
+        } else {
+            selectedIconDisplay.classList.add('text-muted');
+            selectedIconDisplay.innerHTML = '<span>No icon selected</span>';
+        }
+    });
+</script>
