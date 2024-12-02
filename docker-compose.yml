@@ -1,4 +1,18 @@
-﻿services:
+﻿version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: mysql-container
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 2s
+      retries: 10
+  
   kanatomo:
     image: kanatomo
     build:
@@ -6,5 +20,12 @@
       dockerfile: KanaTomo/Dockerfile
     ports:
       - "5070:80"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    environment:
+      - DefaultConnection=Server=mysql;Port=3306;Database=mysql-container;User=root;Password=1234;
+      - jwtSecret=YourVeryLongAndSecureSecretKeyHere1234567892
+    depends_on:
+      mysql:
+        condition: service_healthy  
+
+volumes:
+  mysql_data:

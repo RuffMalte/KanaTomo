@@ -146,7 +146,11 @@ if (string.IsNullOrEmpty(connectionString))
 }
 builder.Services.AddDbContext<UserContext>(options =>
 {
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(9, 1, 0)));
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(9, 1, 0)),
+        mySqlOptions => mySqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 10,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null));
 });
 
 // Add JWT authentication
@@ -189,6 +193,15 @@ else
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KanaTomo API v1"));
+}
+
+await new InitDatabase().InitializeDatabaseAsync(app.Services);
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<UserContext>();
+    context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
