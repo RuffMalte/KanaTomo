@@ -15,11 +15,11 @@ public interface IApiEmailService
 
 public class ApiEmailService : IApiEmailService
 {
-    private readonly ApiEmailRepository _repository;
+    private readonly IApiEmailRepository _repository;
     private readonly ILogger<ApiEmailService> _logger;
     private readonly bool _isEmailConfigured;
 
-    public ApiEmailService(ApiEmailRepository repository, ILogger<ApiEmailService> logger)
+    public ApiEmailService(IApiEmailRepository repository, ILogger<ApiEmailService> logger)
     {
         _repository = repository;
         _logger = logger;
