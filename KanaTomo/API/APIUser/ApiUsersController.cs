@@ -9,6 +9,7 @@ namespace KanaTomo.API.APIUser;
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
+[Authorize]
 [Produces("application/json")]
 public class ApiUsersController : ControllerBase
 {
@@ -19,7 +20,7 @@ public class ApiUsersController : ControllerBase
         _userService = userService;
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
     {
@@ -27,7 +28,7 @@ public class ApiUsersController : ControllerBase
         return Ok(users);
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpGet("{id}")]
     public async Task<ActionResult<UserModel>> GetUser(Guid id)
     {
@@ -47,6 +48,7 @@ public class ApiUsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [UserOwnership]
     public async Task<IActionResult> UpdateUser(Guid id, UserModel user)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -83,7 +85,7 @@ public class ApiUsersController : ControllerBase
         return await _userService.GetUserByIdAsync(id) != null;
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
@@ -91,7 +93,7 @@ public class ApiUsersController : ControllerBase
         return NoContent();
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpGet("me")]
     public async Task<ActionResult<UserModel>> GetCurrentUser()
     {

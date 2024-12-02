@@ -1,3 +1,4 @@
+using KanaTomo.Helper;
 using KanaTomo.Models.Anki;
 
 namespace KanaTomo.API.APIAnki;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [Produces("application/json")]
+[Authorize]
 public class ApiAnkiController : ControllerBase
 {
     private readonly IApiAnkiService _ankiService;
@@ -19,7 +21,6 @@ public class ApiAnkiController : ControllerBase
         _ankiService = ankiService;
     }
 
-    [Authorize]
     [HttpPost("addCard")]
     public async Task<ActionResult<AnkiModel>> AddCardToUser([FromBody] AnkiModel ankiItem)
     {
@@ -34,7 +35,6 @@ public class ApiAnkiController : ControllerBase
         return CreatedAtAction(nameof(GetAnkiItem), new { id = createdAnkiItem.Id }, createdAnkiItem);
     }
 
-    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<AnkiModel>> GetAnkiItem(Guid id)
     {
@@ -46,7 +46,7 @@ public class ApiAnkiController : ControllerBase
         return Ok(ankiItem);
     }
 
-    [Authorize]
+    [UserOwnership]
     [HttpGet("user")]
     public async Task<ActionResult<IEnumerable<AnkiModel>>> GetUserAnkiItems()
     {
@@ -61,7 +61,6 @@ public class ApiAnkiController : ControllerBase
         return Ok(ankiItems);
     }
 
-    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAnkiItem(Guid id, [FromBody] AnkiModel ankiItem)
     {
@@ -79,7 +78,6 @@ public class ApiAnkiController : ControllerBase
         return NoContent();
     }
 
-    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnkiItem(Guid id)
     {
@@ -92,7 +90,7 @@ public class ApiAnkiController : ControllerBase
         return NoContent();
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpGet("due")]
     public async Task<ActionResult<IEnumerable<AnkiModel>>> GetDueAnkiItems()
     {
@@ -107,7 +105,6 @@ public class ApiAnkiController : ControllerBase
         return Ok(dueAnkiItems);
     }
     
-    [Authorize]
     [HttpPost("review/{id}")]
     public async Task<ActionResult<AnkiModel>> ReviewAnkiItem(Guid id, [FromBody] int difficulty)
     {
@@ -119,7 +116,7 @@ public class ApiAnkiController : ControllerBase
         return Ok(updatedItem);
     }
     
-    [Authorize]
+    [UserOwnership]
     [HttpPost("reset")]
     public async Task<IActionResult> ResetAllCards()
     {
